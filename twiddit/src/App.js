@@ -1,28 +1,33 @@
 import React, { Component } from "react";
-import { Grid, Segment, Header, Dropdown, Label, Divider, Button, Icon, Input} from 'semantic-ui-react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import NavBar from './components/NavBar.jsx';
+import Profile from './components/Profile.jsx';
+import Nav from './components/Nav.jsx';
+import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   render() {
     return (
       <Router>
         <NavBar/>
-        <div className="container">
-          <div className="col-3">
-            <Button.Group vertical widths='5'>
-              <Button id='home' fluid>
-                  Home
-              </Button>
-              <Button id='profile' fluid>
-                  Profile
-              </Button>
-              <Button id='likes' fluid>
-                  Likes
-              </Button>
-            </Button.Group>
+          <div className="row">
+            <div className="col-3">
+              <Nav />
+              <div class="popular-communities second-row">
+                <div class="card-body">
+                  <h3 class="card-title">Popular Communities</h3>
+
+                </div>
+              </div>
+            </div>
+            <div className="col-3">
+              <Profile />
+            </div>
+            <div className="col-6">
+              <p>Hello</p>
+            </div>
           </div>
-        </div>
       </Router>
       
     );

@@ -1,0 +1,12 @@
+/* repetitive from app.css; remove if there is other css */
+.btn-group-vertical .btn {
+    width: 22em;
+    border-radius: 17px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: #EEEFF9;
+}
+
+.btn-group-vertical .btn:hover {
+    background-color: #dfe1f3;
+}

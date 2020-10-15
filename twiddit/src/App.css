@@ -1,2 +1,30 @@
-.home-nav-buttons {
+html, body {
+    margin: 0%;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.row {
+    margin: 2em;
+}
+
+.btn-group-vertical .btn {
+    width: 22em;
+    border-radius: 17px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: #EEEFF9;
+}
+
+.btn-group-vertical .btn:hover {
+    background-color: #dfe1f3;
+}
+
+.popular-communities {
+    width: 22em;
+    height: 35em;
+    border-radius: 17px;
+    padding-bottom: 0.5em;
+    background-color: #EEEFF9;
 }

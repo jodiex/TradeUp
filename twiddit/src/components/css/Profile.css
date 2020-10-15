@@ -1,0 +1,40 @@
+.second-row {
+    margin-top: 2em;
+}
+
+.profile {
+    width: 22em;
+    height: 35em;
+    border-radius: 17px;
+    padding-top: 2em;
+    padding-bottom: 0.5em;
+    background-color: #EEEFF9;
+}
+
+.profile h5 {
+    margin-top: 0;
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 14em;
+}
+
+.profile .user-desc {
+    color: #727272;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.follow-button {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.profile .btn-second {
+    background-color: #6371E8;
+    color: white;
+    width: 8em;
+    margin-right: 0;
+    border-radius: 8px;
+}
