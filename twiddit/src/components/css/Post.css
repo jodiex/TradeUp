@@ -42,6 +42,10 @@
     margin-bottom: 0.5em;
 }
 
+.post .btn-third:hover {
+    background-color: #a7a9d8;
+}
+
 .post h5 {
     color: #727272;
     margin: 0;
