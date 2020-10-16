@@ -8,22 +8,22 @@ class Profile extends Component {
   render() {
     return (
         <div>
-            <div class="profile">
-                <div class="profile-img text-center">
+            <div className="profile">
+                <div className="profile-img text-center">
                     <img src={profilePic} alt="Profile picture" />
                 </div>
-                <div class="card-body">
-                    <h3 class="card-title text-center">Jodie Xiang</h3>
-                    <h5 class="card-text text-center username">@username</h5>
-                    <h5 class="card-text user-desc">Hello, my name is Jodie! I am a third year uni student.</h5>
-                    <div class="follow-button">
-                        <button type="button" class="btn btn-second"><MdPersonAdd size="18px"/> Follow</button>
+                <div className="card-body">
+                    <h3 className="card-title text-center">Jodie Xiang</h3>
+                    <h5 className="card-text text-center username">@username</h5>
+                    <h5 className="card-text user-desc">Hello, my name is Jodie! I am a third year uni student.</h5>
+                    <div className="follow-button">
+                        <button type="button" className="btn btn-second"><MdPersonAdd size="18px"/> Follow</button>
                     </div>
                 </div>
             </div>
-            <div class="btn-group-vertical second-row" role="group">
-                <button type="button" class="btn"><CgAdd size="18px"/> 653 Following</button>
-                <button type="button" class="btn"><MdPersonOutline size="18px"/>18.6k Followers</button>
+            <div className="btn-group-vertical second-row" role="group">
+                <button type="button" className="btn"><CgAdd size="18px"/> 653 Following</button>
+                <button type="button" className="btn"><MdPersonOutline size="18px"/>18.6k Followers</button>
             </div>
         </div>
     );

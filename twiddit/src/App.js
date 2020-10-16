@@ -15,14 +15,25 @@ class App extends Component {
         <NavBar/>
           <div className="row">
             <div className="col-3">
-              <Nav />
-              <Communities />
-            </div>
-            <div className="col-3">
-              <Profile />
+              <div className="left-sidebar">
+                <Nav />
+                <Communities />
+              </div>
             </div>
             <div className="col-6">
-              <Post />
+              <div className="posts">
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="right-sidebar">
+                <Profile />
+              </div>
             </div>
           </div>
       </Router>

@@ -1,12 +1,13 @@
 .post {
-    width: 46em;
-    height: 8em;
+    width: 46.5em;
+    height: 10em;
     border-radius: 17px;
     padding-bottom: 0.5em;
     background-color: #EEEFF9;
     padding-left: 1.5em;
     padding-right: 1.5em;
     position: relative;
+    margin-bottom: 2em;
 }
 
 .post .row {
@@ -29,6 +30,18 @@
     border-radius: 10px;
 }
 
+.post .btn-second:hover {
+    background-color: #3f4dc7;
+}
+
+.post .btn-third {
+    background-color: #cccdeb;
+    font-size: 11px;
+    border-radius: 10px;
+    padding: 0.5em 1em;
+    margin-bottom: 0.5em;
+}
+
 .post h5 {
     color: #727272;
     margin: 0;
@@ -37,8 +50,4 @@
 .post .post-stats {
     position:absolute;                  
     bottom: 0.5em;
-}
-
-.post .post-likes {
-    margin-left: 1em;
 }

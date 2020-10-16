@@ -20,3 +20,17 @@ html, body {
 .btn-group-vertical .btn:hover {
     background-color: #dfe1f3;
 }
+
+.left-sidebar {
+    position: fixed;
+    top: 7em;
+}
+
+.posts {
+    margin-top: 5em;
+}
+
+.right-sidebar {
+    position: fixed;
+    top: 7em;
+}
