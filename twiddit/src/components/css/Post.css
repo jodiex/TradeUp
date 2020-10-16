@@ -1,0 +1,44 @@
+.post {
+    width: 46em;
+    height: 8em;
+    border-radius: 17px;
+    padding-bottom: 0.5em;
+    background-color: #EEEFF9;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    position: relative;
+}
+
+.post .row {
+    margin: 0;
+}
+
+.post .post-title {
+    margin-top: 0.75em;
+}
+
+.post .btn-second {
+    background-color: #6371E8;
+    font-size: 12px;
+    padding: 0;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin-left: 1em;
+    height: 2em;
+    color: white;
+    border-radius: 10px;
+}
+
+.post h5 {
+    color: #727272;
+    margin: 0;
+}
+
+.post .post-stats {
+    position:absolute;                  
+    bottom: 0.5em;
+}
+
+.post .post-likes {
+    margin-left: 1em;
+}

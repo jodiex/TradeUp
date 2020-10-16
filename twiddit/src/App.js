@@ -4,6 +4,7 @@ import NavBar from './components/NavBar.jsx';
 import Profile from './components/Profile.jsx';
 import Nav from './components/Nav.jsx';
 import Communities from './components/Communities.jsx';
+import Post from './components/Post.jsx';
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -21,7 +22,7 @@ class App extends Component {
               <Profile />
             </div>
             <div className="col-6">
-              <p>Hello</p>
+              <Post />
             </div>
           </div>
       </Router>

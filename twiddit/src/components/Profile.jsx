@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './css/Profile.css';
 import profilePic from "./../harley.png";
-import { MdPersonAdd } from "react-icons/md";
+import { MdPersonAdd, MdPersonOutline } from "react-icons/md";
 import { CgAdd } from "react-icons/cg";
 
 class Profile extends Component {
@@ -23,7 +23,7 @@ class Profile extends Component {
             </div>
             <div class="btn-group-vertical second-row" role="group">
                 <button type="button" class="btn"><CgAdd size="18px"/> 653 Following</button>
-                <button type="button" class="btn">18.6k Followers</button>
+                <button type="button" class="btn"><MdPersonOutline size="18px"/>18.6k Followers</button>
             </div>
         </div>
     );
