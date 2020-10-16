@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import './css/Profile.css';
-import profilePic from "./../harley.png";
+import profilePic from "../harley.png";
 import { MdPersonAdd, MdPersonOutline } from "react-icons/md";
 import { CgAdd } from "react-icons/cg";
 
