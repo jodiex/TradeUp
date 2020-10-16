@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import NavBar from './components/NavBar.jsx';
 import Profile from './components/Profile.jsx';
 import Nav from './components/Nav.jsx';
+import Communities from './components/Communities.jsx';
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,12 +15,7 @@ class App extends Component {
           <div className="row">
             <div className="col-3">
               <Nav />
-              <div class="popular-communities second-row">
-                <div class="card-body">
-                  <h3 class="card-title">Popular Communities</h3>
-
-                </div>
-              </div>
+              <Communities />
             </div>
             <div className="col-3">
               <Profile />

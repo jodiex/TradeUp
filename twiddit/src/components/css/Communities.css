@@ -1,0 +1,42 @@
+.communities {
+    width: 22em;
+    height: 35em;
+    border-radius: 17px;
+    padding-bottom: 0.5em;
+    background-color: #EEEFF9;
+}
+
+.communities .row {
+    margin: 0 !important;
+}
+
+.communities .card-body {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.communities .card-title {
+    margin-bottom: 1em;
+}
+
+.communities h4, a {
+    color: #727272;
+}
+
+.communities a:hover {
+    color: #4b4b4b;
+}
+
+.communities .btn-second {
+    background-color: #6371E8;
+    color: white;
+    width: 2em;
+    height: 2em;
+    margin: 0;
+    padding: 0;
+    border-radius: 8px;
+}
+
+.communities .btn-second:hover {
+    background-color: #3f4dc7;
+}

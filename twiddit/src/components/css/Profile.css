@@ -38,3 +38,7 @@
     margin-right: 0;
     border-radius: 8px;
 }
+
+.profile .btn-second:hover {
+    background-color: #3f4dc7;
+}

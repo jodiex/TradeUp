@@ -20,11 +20,3 @@ html, body {
 .btn-group-vertical .btn:hover {
     background-color: #dfe1f3;
 }
-
-.popular-communities {
-    width: 22em;
-    height: 35em;
-    border-radius: 17px;
-    padding-bottom: 0.5em;
-    background-color: #EEEFF9;
-}

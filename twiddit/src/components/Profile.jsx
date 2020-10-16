@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import './css/Profile.css';
 import profilePic from "./../harley.png";
+import { MdPersonAdd } from "react-icons/md";
+import { CgAdd } from "react-icons/cg";
 
 class Profile extends Component {
   render() {
@@ -15,12 +17,12 @@ class Profile extends Component {
                     <h5 class="card-text text-center username">@username</h5>
                     <h5 class="card-text user-desc">Hello, my name is Jodie! I am a third year uni student.</h5>
                     <div class="follow-button">
-                        <button type="button" class="btn btn-second">Follow</button>
+                        <button type="button" class="btn btn-second"><MdPersonAdd size="18px"/> Follow</button>
                     </div>
                 </div>
             </div>
             <div class="btn-group-vertical second-row" role="group">
-                <button type="button" class="btn">653 Following</button>
+                <button type="button" class="btn"><CgAdd size="18px"/> 653 Following</button>
                 <button type="button" class="btn">18.6k Followers</button>
             </div>
         </div>
