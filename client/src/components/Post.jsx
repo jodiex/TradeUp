@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import './css/Post.css';
 import { CgHeart } from "react-icons/cg";
 import { AiOutlineRetweet } from "react-icons/ai";
+
 class Post extends Component {
   render() {
     return (

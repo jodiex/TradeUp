@@ -1,41 +1,21 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import NavBar from './components/NavBar.jsx';
-import Profile from './components/Profile.jsx';
-import Nav from './components/Nav.jsx';
-import Communities from './components/Communities.jsx';
-import Post from './components/Post.jsx';
+import Sidebar from './components/Sidebar';
+import Post from './components/Post';
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Flex, Box, Spacer } from "@chakra-ui/react"
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <NavBar/>
-          <div className="row">
-            <div className="col-3">
-              <div className="left-sidebar">
-                <Nav />
-                <Communities />
-              </div>
-            </div>
-            <div className="col-6">
-              <div className="posts">
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-              </div>
-            </div>
-            <div className="col-3">
-              <div className="right-sidebar">
-                <Profile />
-              </div>
-            </div>
-          </div>
+        <Flex>
+          <Spacer />
+          <Sidebar />
+          <Post />
+          <Spacer />
+        </Flex>
       </Router>
       
     );
