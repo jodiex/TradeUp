@@ -2,8 +2,10 @@ import { extendTheme } from "@chakra-ui/react"
 
 const theme = extendTheme({
 	colors: {
-		darkPurple: '#9DA1FF',
+        darkPurple: '#9DA1FF',
+        darkerPurple: '#6371E8',
         lightPurple: '#EEEFF9',
+        lightGray: '#E3E3E3',
 	},
 	fonts: {
 		body: 'system-ui, sans-serif',
@@ -32,11 +34,20 @@ const theme = extendTheme({
             fontWeight: "medium",
             lineHeight: "110%",
         },
-        h6: {
-            fontSize: ["xs", "sm"],
-            fontWeight: "medium",
+        h5: {
+            fontSize: ["sm", "md"],
+            fontWeight: "normal",
             color: "gray",
         },
+        h6: {
+            fontSize: ["xs", "sm"],
+            fontWeight: "normal",
+            color: "gray",
+        },
+        h7: {
+            fontSize: ["xs"],
+            fontWeigt: "medium"
+        }
     },
 	fontWeights: {
 		normal: 400,
@@ -76,6 +87,34 @@ const theme = extendTheme({
                     h: "2.5em"
                 },
             },
+            baseStyle: {
+                borderRadius: "xl",
+            },
+            variants: {
+                "navButton": {
+                    bg: "white",
+                    color: "black",
+                    _hover: { bg: "lightGray" },
+                    size: "3xs",
+                    textStyle: "h3"
+                },
+                "secondary": {
+                    bg: "darkPurple",
+                    color: "white",
+                    _hover: { bg: "darkerPurple" }
+                },
+                "sidebarButton": {
+                    bg: "white",
+                    color: "black",
+                    _hover: { bg: "lightGray" },
+                    w: "2xs",
+                    textStyle: "h4"
+                },
+                link: {
+                    _hover: { color: "darkPurple" },
+                    size: "md",
+                }
+            }
         },
     },
 })

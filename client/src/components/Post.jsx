@@ -1,25 +1,30 @@
 import React, { Component } from "react";
-import './css/Post.css';
 import { CgHeart } from "react-icons/cg";
 import { AiOutlineRetweet } from "react-icons/ai";
+import { Box, Text, Container, Button, Icon, Image, HStack, IconButton } from "@chakra-ui/react";
 
 class Post extends Component {
   render() {
     return (
-        <div className="post">
-            <div className="row justify-content-between">
-                <div className="row">
-                    <h4 className="post-title">Jodie Xiang &ensp; @username</h4>
-                    <button type="button" className="btn btn-second post-title"># The Walking Dead</button>
-                </div>
-                <p className="post-date post-title">Sep 24/2020</p>
-            </div>
-            <h5>Hello, my name is Jodie! I am a third year uni student.</h5>
-            <div className="row post-stats">
-                <button type="button" className="btn btn-third post-reshares"><AiOutlineRetweet size="16px"/> 9 Reshares</button>
-                <button type="button" className="btn btn-third post-likes"><CgHeart size="16px"/> 15 Likes</button>
-            </div>
-        </div>
+        <Box h={["12em", null, "9em", null, "8em"]} bg="white" borderRadius="2xl" py="3" px="4" pos="relative">
+            <HStack>
+                <Text textStyle="h3">John Smith</Text>
+                <Text textStyle="h4">@username</Text>
+                <Button
+                variant="secondary"
+                textStyle="h7"
+                size="xs">
+                    # The Walking Dead
+                </Button>
+            </HStack>
+            <Text textStyle="h6" mt="1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
+            <HStack pos="absolute" bottom="3" left="1">
+                <IconButton aria-label="Retweet" variant="link" icon={<AiOutlineRetweet />}/>
+                <IconButton aria-label="Like" variant="link" icon={<CgHeart />}/>
+                <Text textStyle="h6">Sept 24</Text>
+            </HStack>
+
+        </Box>
     );
     }
 }
