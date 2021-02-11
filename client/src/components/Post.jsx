@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { CgHeart } from "react-icons/cg";
 import { AiOutlineRetweet } from "react-icons/ai";
-import { Box, Text, Container, Button, Icon, Image, HStack, IconButton } from "@chakra-ui/react";
+import { Box, Text, Button, HStack, IconButton } from "@chakra-ui/react";
 
 class Post extends Component {
   render() {
@@ -21,9 +21,8 @@ class Post extends Component {
             <HStack pos="absolute" bottom="3" left="1">
                 <IconButton aria-label="Retweet" variant="link" icon={<AiOutlineRetweet />}/>
                 <IconButton aria-label="Like" variant="link" icon={<CgHeart />}/>
-                <Text textStyle="h6">Sept 24</Text>
+                <Text textStyle="h6" pl="1">4:11pm&emsp;Sept 24</Text>
             </HStack>
-
         </Box>
     );
     }

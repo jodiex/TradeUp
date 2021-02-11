@@ -46,7 +46,11 @@ const theme = extendTheme({
         },
         h7: {
             fontSize: ["xs"],
-            fontWeigt: "medium"
+            fontWeight: "medium"
+        },
+        h8: {
+            fontSize: ["xs", "md"],
+            fontWeight: "medium"
         }
     },
 	fontWeights: {
@@ -111,7 +115,7 @@ const theme = extendTheme({
                     textStyle: "h4"
                 },
                 link: {
-                    _hover: { color: "darkPurple" },
+                    _hover: { color: "black" },
                     size: "md",
                 }
             }

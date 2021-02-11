@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import { Box, Text, Container, Button, Icon, Image } from "@chakra-ui/react";
+import { VStack } from "@chakra-ui/react";
 import Post from './Post';
+import Write from './Write';
 
 class Feed extends Component {
   render() {
     return (
-        <Box w={["lg", null, "xl", null, "2xl"]} ml="8">
+        <VStack w={["lg", null, "xl", null, "2xl"]} ml="8" spacing={6}>
+            <Write />
             <Post />
-        </Box>
+            <Post />
+        </VStack>
     );
     }
 }

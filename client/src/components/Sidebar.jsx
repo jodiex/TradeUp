@@ -7,7 +7,7 @@ import ProfileStats from './ProfileStats';
 class Sidebar extends Component {
     render() {
         return (
-            <Box w="2xs" mt={["6", "10"]}>
+            <Box w="2xs" mt={["4", "8"]}>
                 <Nav />
                 <Profile />
                 <ProfileStats />
