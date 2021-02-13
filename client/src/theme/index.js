@@ -5,7 +5,7 @@ const theme = extendTheme({
         darkPurple: '#9DA1FF',
         darkerPurple: '#6371E8',
         lightPurple: '#EEEFF9',
-        lightGray: '#E3E3E3',
+        lightGray: '#E1E1E1'
 	},
 	fonts: {
 		body: 'system-ui, sans-serif',
@@ -24,6 +24,12 @@ const theme = extendTheme({
 		'6xl': '64px',
     },
     textStyles: {
+        h1: {
+            fontSize: ["3xl", "3xl"],
+            fontWeight: "bold",
+            fontFamily: "IBM Plex Serif",
+            lineHeight: "110%"
+        },
         h3: {
             fontSize: ["sm", "md"],
             fontWeight: "semibold",

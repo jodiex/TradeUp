@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar';
 import Feed from './components/Feed';
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Flex, Box, Spacer } from "@chakra-ui/react"
+import { Flex, Spacer } from "@chakra-ui/react"
 
 class App extends Component {
   render() {

@@ -4,7 +4,7 @@ import { Box, Input, Button, Stack, Spacer } from "@chakra-ui/react";
 class Write extends Component {
   render() {
     return (
-        <Box w={["lg", null, "xl", null, "2xl"]} mt="24">
+        <Box w={["sm", "md", "lg", "xl", "2xl"]}>
             <Input placeholder="Write something..." bg="white" border="none" borderRadius="xl"/>
             <Stack direction="row" mt="2">
                 <Button

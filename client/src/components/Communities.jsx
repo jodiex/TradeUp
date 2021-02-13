@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import './css/Communities.css';
 import { ImPlus } from "react-icons/im";
 import { MdPeople } from "react-icons/md";
 

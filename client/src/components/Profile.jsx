@@ -5,7 +5,7 @@ import { Box, Text, Container, Button, Icon, Image } from "@chakra-ui/react"
 class Profile extends Component {
   render() {
     return (
-        <Box w="2xs" pos="relative">
+        <Box w="2xs" pos="relative" mb="4">
             <Container centerContent>
                 <Image boxSize="10em" src="https://bit.ly/sage-adebayo" pos="absolute" borderRadius="full" />
             </Container>
