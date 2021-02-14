@@ -5,7 +5,7 @@ const theme = extendTheme({
         darkPurple: '#9DA1FF',
         darkerPurple: '#6371E8',
         lightPurple: '#EEEFF9',
-        lightGray: '#E1E1E1'
+        lightGray: '#E2E1EB'
 	},
 	fonts: {
 		body: 'system-ui, sans-serif',
@@ -85,7 +85,8 @@ const theme = extendTheme({
     styles: {
         global: (props) => ({
             body: {
-                bg: 'lightPurple'
+                bg: 'lightPurple',
+                overscrollBehavior: 'none'
             },
         }),
     },
@@ -105,8 +106,8 @@ const theme = extendTheme({
                     bg: "white",
                     color: "black",
                     _hover: { bg: "lightGray" },
-                    size: "3xs",
-                    textStyle: "h3"
+                    textStyle: "h3",
+                    w: "7em"
                 },
                 "secondary": {
                     bg: "darkPurple",
@@ -119,6 +120,13 @@ const theme = extendTheme({
                     _hover: { bg: "lightGray" },
                     w: "2xs",
                     textStyle: "h4"
+                },
+                "loginButton": {
+                    bg: "white",
+                    color: "black",
+                    _hover: { bg: "lightGray" },
+                    size: "3xs",
+                    textStyle: "h3"
                 },
                 link: {
                     _hover: { color: "black" },
