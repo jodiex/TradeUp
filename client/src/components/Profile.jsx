@@ -50,7 +50,7 @@ const Profile = () => {
                     <Text textStyle="h3">John Smith</Text>
                     <Text textStyle="h4" mt="2">@username</Text>
                 </Container>
-                <Text textStyle="h5" mt="2" px="6">This is my bio.</Text>
+                <Text textStyle="h6" mt="2" px="6">Lorem ipsum.</Text>
                 <Container centerContent pos="absolute" bottom="4">
                     <Button
                     variant="secondary"
