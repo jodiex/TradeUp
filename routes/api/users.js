@@ -14,22 +14,32 @@ const User = require("../../models/User");
 // @access Public
 router.post("/register", (req, res) => {
     const { errors, isValid } = validateRegistration(req.body);
-    // Check validation
+    // check validation
     if (!isValid) {
         return res.status(400).json(errors);
     }
-    // find user by email
+
+    let userAlreadyExists = true;
+    // find user by email and username
     User.findOne({ email: req.body.email }).then(user => {
         if (user) {
             return res.status(400).json({ email: "Email already exists" });
         } else {
+            userAlreadyExists = false;
+        }
+    });
+    User.findOne({ username: req.body.username }).then(user => {
+        if (user) {
+            return res.status(400).json({ email: "Username already exists" });
+        } else if (!userAlreadyExists) {
             const newUser = new User({
                 name: req.body.name,
                 username: req.body.username,
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
+                bio: ''
             });
-            // Hash password before saving in database
+            // hash password before saving in database
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
                     if (err) throw err;
@@ -37,7 +47,7 @@ router.post("/register", (req, res) => {
                     newUser
                         .save()
                         .then(user => res.json(user))
-                        .catch(err => console.log(err));
+                        .catch(error => console.log(error));
                 });
             });
         }

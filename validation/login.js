@@ -4,7 +4,7 @@ const isEmpty = require("is-empty");
 module.exports = function validateLogin(data) {
     let errors = {};
 
-    // Convert empty fields to an empty string so we can use validator functions
+    // Convert empty fields to an empty string
     data.username = !isEmpty(data.username) ? data.username : "";
     data.password = !isEmpty(data.password) ? data.password : "";
 
