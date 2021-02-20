@@ -100,6 +100,10 @@ const theme = extendTheme({
             },
             baseStyle: {
                 borderRadius: "lg",
+                _focus: {
+                    boxShadow: "none",
+                    outline: "none"
+                }
             },
             variants: {
                 "navButton": {

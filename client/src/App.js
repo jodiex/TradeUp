@@ -1,23 +1,18 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Sidebar from './components/Sidebar';
-import Feed from './components/Feed';
+import Home from './Home';
 import Login from './components/Login';
+import Register from './components/Register';
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Flex, Spacer } from "@chakra-ui/react"
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <Flex>
-          <Spacer />
-          <Sidebar />
-          <Feed />
-          <Spacer />
-        </Flex>
-        <Login />
+        <Route path="/" exact component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
       </Router>
       
     );
