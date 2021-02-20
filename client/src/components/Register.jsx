@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Box, Center, Input, Text, VStack, Button, InputGroup, InputRightElement } from "@chakra-ui/react"
+import { Link } from "react-router-dom";
+import { Box, Center, Input, Text, VStack, Button, InputGroup, InputRightElement, FormControl, FormLabel } from "@chakra-ui/react"
 import Logo from "./Logo";
 
 const Register = () => {
@@ -24,21 +24,21 @@ const Register = () => {
       >
         <Logo />
         <VStack spacing={6} mt="6">
-          <Box w="100%">
-            <Text textStyle="h3">Name</Text>
-            <Input borderRadius="lg" mt="2"/>
-          </Box>
-          <Box w="100%">
-            <Text textStyle="h3">Email</Text>
-            <Input borderRadius="lg" mt="2"/>
-          </Box>
-          <Box w="100%">
-            <Text textStyle="h3">Username</Text>
-            <Input borderRadius="lg" mt="2"/>
-          </Box>
-          <Box w="100%">
-            <Text textStyle="h3">Password</Text>
-            <InputGroup mt="2">
+          <FormControl id="name">
+            <FormLabel>Name</FormLabel>
+            <Input type="text"/>
+          </FormControl>
+          <FormControl id="email">
+            <FormLabel>Email address</FormLabel>
+            <Input type="email" />
+          </FormControl>
+          <FormControl id="username">
+            <FormLabel>Username</FormLabel>
+            <Input type="text"/>
+          </FormControl>
+          <FormControl id="password1">
+            <FormLabel>Password</FormLabel>
+            <InputGroup>
               <Input
                 type={showPassword1 ? "text" : "password"}
               />
@@ -48,10 +48,10 @@ const Register = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
-          </Box>
-          <Box w="100%">
-            <Text textStyle="h3">Confirm password</Text>
-            <InputGroup mt="2">
+          </FormControl>
+          <FormControl id="password2">
+            <FormLabel>Confirm password</FormLabel>
+            <InputGroup>
               <Input
                 type={showPassword2 ? "text" : "password"}
               />
@@ -61,8 +61,14 @@ const Register = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
-          </Box>
-          <Button variant="secondary" w="3xs">Sign up</Button>
+          </FormControl>
+          <Button
+            variant="secondary"
+            w="3xs"
+            type="submit"
+          >
+            Sign up
+          </Button>
           <Text textStyle="h4">Already have an account? <Link to="/login">Login here</Link></Text>
         </VStack>
       </Box>

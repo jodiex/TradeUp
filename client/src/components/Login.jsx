@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Box, Center, Input, Text, VStack, Button, InputGroup, InputRightElement } from "@chakra-ui/react"
+import { Link } from "react-router-dom";
+import { Box, Center, Input, Text, VStack, Button, InputGroup, InputRightElement, FormControl, FormLabel } from "@chakra-ui/react"
 import Logo from "./Logo";
 
 const Login = () => {
@@ -23,13 +23,13 @@ const Login = () => {
       >
         <Logo />
         <VStack spacing={8} mt="8">
-          <Box w="100%">
-            <Text textStyle="h3">Username</Text>
-            <Input bg="white" borderRadius="lg" mt="2"/>
-          </Box>
-          <Box w="100%">
-            <Text textStyle="h3">Password</Text>
-            <InputGroup mt="2">
+          <FormControl id="username">
+            <FormLabel>Username</FormLabel>
+            <Input type="text"/>
+          </FormControl>
+          <FormControl id="password">
+            <FormLabel>Password</FormLabel>
+            <InputGroup>
               <Input
                 type={showPassword ? "text" : "password"}
               />
@@ -39,8 +39,14 @@ const Login = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
-          </Box>
-          <Button variant="secondary" w="3xs">Log in</Button>
+          </FormControl>
+          <Button
+            variant="secondary"
+            w="3xs"
+            type="submit"
+          >
+            Log in
+          </Button>
           <Text textStyle="h4">Don't have an account? <Link to="/register">Register here</Link></Text>
         </VStack>
       </Box>
