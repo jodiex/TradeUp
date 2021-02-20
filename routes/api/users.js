@@ -59,26 +59,26 @@ router.post("/register", (req, res) => {
 // @access Public
 router.post("/login", (req, res) => {
     const { errors, isValid } = validateLogin(req.body);
-    // Check validation
+    // check validation
     if (!isValid) {
         return res.status(400).json(errors);
     }
     const username = req.body.username;
     const password = req.body.password;
-    // Find user by email
+    // find user by username
     User.findOne({ username }).then(user => {
         if (!user) {
-            return res.status(404).json({ usernamenotfound: "Username not found" });
+            return res.status(404).json({ username: "Username not found" });
         }
-        // Check password
+        // check password matches password in db
         bcrypt.compare(password, user.password).then(isMatch => {
             if (isMatch) {
-                // User matched so create JWT Payload
+                // create JWT Payload
                 const payload = {
                     id: user.id,
                     name: user.name
                 };
-                // Sign token
+                // sign token
                 jwt.sign(
                     payload,
                     keys.secretOrKey,
@@ -95,7 +95,7 @@ router.post("/login", (req, res) => {
             } else {
             return res
                 .status(400)
-                .json({ passwordincorrect: "Password incorrect" });
+                .json({ password: "Password incorrect" });
             }
         });
     });

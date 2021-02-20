@@ -14,13 +14,13 @@ module.exports = function validateRegistration(data) {
     // Name checks
     if (Validator.isEmpty(data.name)) {
         errors.name = "Name field is required";
-    } else if (!Validator.isLength(data.name, { max: 22 })) {
+    } else if (!Validator.isLength(data.name, { min: 0, max: 22 })) {
         errors.name = "Name must be at most 22 characters"
     }
     // Username checks
     if (Validator.isEmpty(data.username)) {
         errors.username = "Username field is required";
-    } else if (!Validator.isLength(data.name, { max: 25 })) {
+    } else if (!Validator.isLength(data.username, { min: 0, max: 25 })) {
         errors.username = "Username must be at most 25 characters"
     }
 
