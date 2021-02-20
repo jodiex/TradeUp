@@ -9,7 +9,7 @@ class Communities extends Component {
         <Box w="2xs"
         bg="white"
         h="sm"
-        borderRadius="3xl"
+        borderRadius="2xl"
         >
             <Container p="4">
                 <Text textStyle="h3">Popular Communities&ensp;<Icon as={MdPeople} w={5} h={5} /></Text>

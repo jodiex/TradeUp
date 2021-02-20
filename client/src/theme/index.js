@@ -56,7 +56,7 @@ const theme = extendTheme({
         },
         h8: {
             fontSize: ["xs", "md"],
-            fontWeight: "medium"
+            fontWeight: "semibold"
         }
     },
 	fontWeights: {
@@ -99,7 +99,7 @@ const theme = extendTheme({
                 },
             },
             baseStyle: {
-                borderRadius: "xl",
+                borderRadius: "lg",
             },
             variants: {
                 "navButton": {

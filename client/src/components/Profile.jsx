@@ -42,7 +42,7 @@ const Profile = () => {
             <Box
             bg="white"
             h="xs"
-            borderRadius="3xl"
+            borderRadius="2xl"
             pt="5em"
             mt="4em"
             >

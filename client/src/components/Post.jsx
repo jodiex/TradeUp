@@ -6,7 +6,7 @@ import { Box, Text, Button, HStack, IconButton } from "@chakra-ui/react";
 class Post extends Component {
   render() {
     return (
-        <Box h={["9em", null, "9em", null, "8em"]} bg="white" borderRadius="2xl" py="3" px="4" pos="relative">
+        <Box h={["9em", null, "9em", null, "8em"]} bg="white" borderRadius="xl" py="3" px="4" pos="relative">
             <HStack>
                 <Text textStyle="h3">John Smith</Text>
                 <Text textStyle="h4">@username</Text>

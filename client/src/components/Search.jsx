@@ -11,7 +11,7 @@ class Search extends Component {
                 pointerEvents="none"
                 children={<HiSearch color="#A0AEC0" />}
                 />
-                <Input placeholder="Search something..." bg="white" border="none" borderRadius="xl"/>
+                <Input placeholder="Search something..." bg="white" border="none" borderRadius="lg"/>
             </InputGroup>
         </Box>
     );

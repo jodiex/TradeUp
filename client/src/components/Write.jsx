@@ -5,7 +5,7 @@ class Write extends Component {
   render() {
     return (
         <Box w={["sm", "md", "lg", "xl", "2xl"]}>
-            <Input placeholder="Write something..." bg="white" border="none" borderRadius="xl"/>
+            <Input placeholder="Write something..." bg="white" border="none" borderRadius="lg"/>
             <Stack direction="row" mt="2">
                 <Button
                 variant="secondary"
