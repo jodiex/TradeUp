@@ -3,18 +3,19 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from './Home';
 import Login from './components/Login';
 import Register from './components/Register';
-import "./App.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from "react-redux";
+import store from "./store";
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <Route path="/" exact component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-      </Router>
-      
+      <Provider store={store}>
+        <Router>
+          <Route path="/" exact component={Home} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/register" exact component={Register} />
+        </Router>
+      </Provider>
     );
   }
 }
