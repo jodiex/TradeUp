@@ -29,6 +29,11 @@ const UserSchema = new Schema({
     required: false,
     default: '',
     maxLength: 175
+  },
+  emojiStatus: {
+    type: String,
+    required: false,
+    default: '😀'
   }
 });
 

@@ -32,10 +32,10 @@ module.exports = function validateRegistration(data) {
     }
 
     // Password checks
-    if (Validator.isEmpty(data.password)) {
-        errors.password = "Password field is required";
-    } else if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
-        errors.password = "Password must be between 6-30 characters";
+    if (Validator.isEmpty(data.password1)) {
+        errors.password1 = "Password field is required";
+    } else if (!Validator.isLength(data.password1, { min: 6, max: 30 })) {
+        errors.password1 = "Password must be between 6-30 characters";
     }
 
     if (Validator.isEmpty(data.password2)) {
