@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Box, Center, Input, Text, VStack, Button, InputGroup, InputRightElement, FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/react"
 import Logo from "./Logo";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser } from "../../actions/authActions";
+import { loginUser } from "../actions/authActions";
 
 class Login extends Component {
   constructor() {
@@ -24,7 +24,7 @@ class Login extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/"); // push user to homepage when they login
     }
@@ -46,10 +46,10 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
-    this.props.loginUser(userData);
+    this.props.loginUser(userData, this.props.history);
   };
 
-  handlePasswordVisibilty = () => setState({ showPassword: !showPassword });
+  handlePasswordVisibilty = () => this.setState({ showPassword: !this.state.showPassword });
 
   render() {
     const { errors } = this.state;
@@ -61,7 +61,6 @@ class Login extends Component {
       <Center h={height}>
         <Box
         bg="white"
-        h="md"
         w={["sm", null, "md", "lg", null]}
         borderRadius="2xl"
         py="10"
@@ -89,7 +88,7 @@ class Login extends Component {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
-                <FormErrorMessage>{errors.passsword}</FormErrorMessage>
+                <FormErrorMessage>{errors.password}</FormErrorMessage>
               </FormControl>
               <Button
                 variant="secondary"
@@ -118,4 +117,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(mapStateToProps, { loginUser })(withRouter(Login));

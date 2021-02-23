@@ -12,7 +12,12 @@ import {
 export const registerUser = (newUser, history) => dispatch => {
   axios
     .post("/api/users/register", newUser)
-    .then(res => history.push("/")) // re-direct to homepage on successful register
+    .then(res => {
+      dispatch(loginUser({
+        username: newUser.username,
+        password: newUser.password1
+      }), history)
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -22,7 +27,7 @@ export const registerUser = (newUser, history) => dispatch => {
 };
 
 // login
-export const loginUser = (userData) => dispatch => {
+export const loginUser = (userData, history) => dispatch => {
   axios
     .post("/api/users/login", userData)
     .then(res => {
@@ -34,10 +39,9 @@ export const loginUser = (userData) => dispatch => {
       // decode token to get user data
       const decoded = jwt_decode(token);
       // set current user to decoded user data
-      dispatch({
-        type: SET_CURRENT_USER,
-        payload: decoded
-      });
+      dispatch(setCurrentUser(decoded));
+      // redirect to homepage on successful login
+      history.push("/");
     })
     .catch(err =>
       dispatch({
@@ -54,10 +58,17 @@ export const logoutUser = () => dispatch => {
   // remove auth header for future requests
   setAuthToken(false);
   // set current user to empty object {} which will set isAuthenticated to false
-  dispatch({
+  dispatch(setCurrentUser({}));
+  // redirect to login
+  window.location.href = "./login";
+};
+
+// set logged in user
+export const setCurrentUser = decoded => {
+  return {
     type: SET_CURRENT_USER,
-    payload: {}
-  });
+    payload: decoded
+  };
 };
 
 // user loading

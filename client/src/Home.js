@@ -10,8 +10,8 @@ class Home extends Component {
       <Fragment>
         <Flex>
           <Spacer />
-          <Sidebar />
-          <Feed />
+          <Sidebar isProfile={false}/>
+          <Feed mode="home"/>
           <Spacer />
         </Flex>
         <LoginButtons />

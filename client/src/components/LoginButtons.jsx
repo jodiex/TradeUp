@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Button, HStack } from "@chakra-ui/react";
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
-import { Fragment } from "react";
+import { logoutUser } from "../actions/authActions";
+import PropTypes from "prop-types";
 
 class LoginButtons extends Component {
   onLogoutClick = e => {

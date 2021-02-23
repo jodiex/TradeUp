@@ -30,14 +30,15 @@ router.post("/register", (req, res) => {
     });
     User.findOne({ username: req.body.username }).then(user => {
         if (user) {
-            return res.status(400).json({ email: "Username already exists" });
+            return res.status(400).json({ username: "Username already exists" });
         } else if (!userAlreadyExists) {
             const newUser = new User({
                 name: req.body.name,
                 username: req.body.username,
                 email: req.body.email,
-                password: req.body.password,
-                bio: ''
+                password: req.body.password1,
+                bio: '',
+                emojiStatus: '😀'
             });
             // hash password before saving in database
             bcrypt.genSalt(10, (err, salt) => {
@@ -95,7 +96,7 @@ router.post("/login", (req, res) => {
             } else {
             return res
                 .status(400)
-                .json({ password: "Password incorrect" });
+                .json({ password: "Incorrect password" });
             }
         });
     });

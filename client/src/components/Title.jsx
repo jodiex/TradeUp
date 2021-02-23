@@ -5,7 +5,7 @@ class Title extends Component {
   render() {
     return (
         <Text textStyle="h1" w={["sm", "md", "lg", "xl", "2xl"]}>
-            Trending Posts
+            {this.props.text}
         </Text>
     );
     }

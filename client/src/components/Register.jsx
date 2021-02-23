@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Box, Center, Input, Text, VStack, Button, InputGroup, InputRightElement, FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/react"
 import Logo from "./Logo";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { registerUser } from "../../actions/authActions";
+import { registerUser } from "../actions/authActions";
 
 class Register extends Component {
   constructor() {
@@ -28,7 +28,7 @@ class Register extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
@@ -53,8 +53,8 @@ class Register extends Component {
     this.props.registerUser(newUser, this.props.history); 
   };
 
-  handlePassword1Visibility = () => this.setState({ showPassword1: !showPassword1 });
-  handlePassword2Visibility = () => this.setState({ showPassword2: !showPassword2 })
+  handlePassword1Visibility = () => this.setState({ showPassword1: !this.state.showPassword1 });
+  handlePassword2Visibility = () => this.setState({ showPassword2: !this.state.showPassword2 })
 
   render() {
     const { errors } = this.state;
