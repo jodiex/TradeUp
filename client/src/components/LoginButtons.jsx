@@ -1,23 +1,24 @@
 import React, { Component, Fragment } from "react";
 import { Button, HStack } from "@chakra-ui/react";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
 import PropTypes from "prop-types";
 
 class LoginButtons extends Component {
-  onLogoutClick = e => {
+  onLogoutClick = (e) => {
     e.preventDefault();
     this.props.logoutUser();
   };
 
-  onLoginClick = e => {
+  onLoginClick = (e) => {
     e.preventDefault();
-    window.location.href = "./login";
+    this.props.history.push("/login");
   };
 
-  onRegisterClick = e => {
+  onRegisterClick = (e) => {
     e.preventDefault();
-    window.location.href = "./register";
+    this.props.history.push("/register");
   };
 
   render() {
@@ -47,4 +48,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { logoutUser })(LoginButtons);
+export default connect(mapStateToProps, { logoutUser })(withRouter(LoginButtons));

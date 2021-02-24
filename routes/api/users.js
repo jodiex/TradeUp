@@ -89,6 +89,7 @@ router.post("/login", (req, res) => {
                     (err, token) => {
                         res.json({
                             success: true,
+                            username: username,
                             token: "Bearer " + token
                         });
                     }
@@ -100,6 +101,19 @@ router.post("/login", (req, res) => {
             }
         });
     });
+});
+
+// @route GET api/users/:username
+// @desc Find user profile and return user
+// @access Public
+router.post("/:username", (req, res) => {
+  // find user by username
+  User.findOne({ req.params.username }).then(user => {
+      if (!user) {
+          return res.status(404).json({ username: "Username not found" });
+      }
+      console.log(user);
+  });
 });
 
 module.exports = router;

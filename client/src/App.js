@@ -18,7 +18,7 @@ if (localStorage.jwtToken) {
   // decode token and get user info and exp
   const decoded = jwt_decode(token);
   // set user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
+  store.dispatch(setCurrentUser(decoded, null));
 
   // check for expired token
   const currentTime = Date.now() / 1000; // in milliseconds
@@ -36,6 +36,7 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
+          <Route path="/user/:username" component={ProfilePage} />
         </Router>
       </Provider>
     );

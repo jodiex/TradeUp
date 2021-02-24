@@ -86,7 +86,7 @@ const theme = extendTheme({
         global: (props) => ({
             body: {
                 bg: 'lightPurple',
-                overscrollBehavior: 'none'
+                overscrollBehaviorY: 'none'
             },
         }),
     },

@@ -16,7 +16,7 @@ export const registerUser = (newUser, history) => dispatch => {
       dispatch(loginUser({
         username: newUser.username,
         password: newUser.password1
-      }), history)
+      }, history))
     })
     .catch(err =>
       dispatch({
@@ -32,14 +32,14 @@ export const loginUser = (userData, history) => dispatch => {
     .post("/api/users/login", userData)
     .then(res => {
       // save token to local storage
-      const { token } = res.data;
+      const { username, token } = res.data;
       localStorage.setItem("jwtToken", token);
       // set token in Auth header
       setAuthToken(token);
       // decode token to get user data
       const decoded = jwt_decode(token);
       // set current user to decoded user data
-      dispatch(setCurrentUser(decoded));
+      dispatch(setCurrentUser(decoded, username));
       // redirect to homepage on successful login
       history.push("/");
     })
@@ -58,16 +58,17 @@ export const logoutUser = () => dispatch => {
   // remove auth header for future requests
   setAuthToken(false);
   // set current user to empty object {} which will set isAuthenticated to false
-  dispatch(setCurrentUser({}));
+  dispatch(setCurrentUser({}, ""));
   // redirect to login
   window.location.href = "./login";
 };
 
 // set logged in user
-export const setCurrentUser = decoded => {
+export const setCurrentUser = (decoded, username) => {
   return {
     type: SET_CURRENT_USER,
-    payload: decoded
+    payload: decoded,
+    username: username
   };
 };
 
