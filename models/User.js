@@ -33,7 +33,7 @@ const UserSchema = new Schema({
   emojiStatus: {
     type: String,
     required: false,
-    default: '😀'
+    default: 'grinning'
   }
 });
 
