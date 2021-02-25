@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './Home';
+import ProfilePage from './ProfilePage';
 import Login from './components/Login';
 import Register from './components/Register';
 import { Provider } from "react-redux";

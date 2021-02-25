@@ -6,12 +6,14 @@ import { Flex, Spacer } from "@chakra-ui/react"
 
 class ProfilePage extends Component {
   render() {
+    const username = this.props.match.params.username;
+
     return (
       <Fragment>
         <Flex>
           <Spacer />
-          <Sidebar isProfile={true}/>
-          <Feed mode="profile"/>
+          <Sidebar isProfile={true} username={username}/>
+          <Feed mode="user"/>
           <Spacer />
         </Flex>
         <LoginButtons />
