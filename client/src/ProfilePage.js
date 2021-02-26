@@ -3,17 +3,20 @@ import Sidebar from './components/Sidebar';
 import Feed from './components/Feed';
 import LoginButtons from './components/LoginButtons';
 import { Flex, Spacer } from "@chakra-ui/react"
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class ProfilePage extends Component {
   render() {
     const username = this.props.match.params.username;
+    const username2 = this.props.auth.username;
 
     return (
       <Fragment>
         <Flex>
           <Spacer />
           <Sidebar isProfile={true} username={username}/>
-          <Feed mode="user"/>
+          <Feed mode={username === username2 ? "profile" : "user"}/>
           <Spacer />
         </Flex>
         <LoginButtons />
@@ -22,4 +25,12 @@ class ProfilePage extends Component {
   }
 }
 
-export default ProfilePage; 
+ProfilePage.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(ProfilePage);

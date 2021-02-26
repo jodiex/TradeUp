@@ -48,7 +48,10 @@ router.post("/register", (req, res) => {
           newUser
             .save()
             .then(user => res.json(user))
-            .catch(error => console.log(error));
+            .catch(error => {
+              console.log(error);
+              return res.status(500);
+            })
         });
       });
     }
@@ -120,6 +123,31 @@ router.get("/:username", (req, res) => {
       emojiStatus: user.emojiStatus
     });
   });
+});
+
+// @route POST api/users/:username
+// @desc Set user profile details
+// @access Public
+router.post("/:username", (req, res) => {
+  // find user by username
+  const username = req.params.username;
+  const newUserProfile = {
+    name: req.body.name,
+    bio: req.body.bio,
+    emojiStatus: req.body.emojiStatus
+  };
+
+  User.findOneAndUpdate({ username }, newUserProfile, { new: true })
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      return res.json(user);
+    })
+    .catch(error => {
+      console.log(error);
+      return res.status(500);
+    });
 });
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { MdPersonAdd } from "react-icons/md";
 import { HiOutlinePencil } from "react-icons/hi";
-import { Box, Text, Container, Button, Icon, Image } from "@chakra-ui/react"
+import { Box, Text, Container, Button, Icon, Image, Input, Textarea } from "@chakra-ui/react"
 import axios from "axios";
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker, Emoji } from 'emoji-mart';
@@ -10,15 +10,13 @@ import PropTypes from "prop-types";
 
 const Profile = (props) => {
   const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
+  const username = props.username;
   const [bio, setBio] = useState('');
 
   useEffect(() => {
     // on component mount, get user data
-    setUsername(props.username);
-  
     axios
-      .get("/api/users/" + props.username)
+      .get("/api/users/" + username)
       .then(res => {
         const { name, bio, emojiStatus } = res.data;
         setName(name);
@@ -32,21 +30,45 @@ const Profile = (props) => {
 
   // emoji status
   const [emojiStatus, setEmojiStatus] = useState('grinning');
-  const [picker, setPicker] = useState(false);
-
+  const [togglePicker, setTogglePicker] = useState(false);
   const onEmojiClick = (emoji) => {
-    setEmojiStatus(emoji.id);
-    setPicker(false);
+    setEmojiStatus(emoji.id)
+    setTogglePicker(false);
   };
-
   const onPickerClick = (e) => {
     e.preventDefault();
-    setPicker(!picker);
+    setTogglePicker((state) => !state);
   }
 
   // redux state
   const username2 = props.auth.username;
   const isAuthenticated = props.auth.isAuthenticated;
+
+  // edit mode
+  const [isEditMode, setIsEditMode] = useState(false);
+  const onSaveProfile = (e) => {
+    e.preventDefault();
+    setName(document.getElementById("name").value);
+    setBio(document.getElementById("bio").value);
+    setIsEditMode(false);
+  }
+  const onEditProfile = (e) => {
+    e.preventDefault();
+    setIsEditMode(true);
+  }
+
+  useEffect(() => {
+    // when name, bio, or emojiStatus are updated, save to db
+    const reqBody = {
+      name: name,
+      bio: bio,
+      emojiStatus: emojiStatus
+    };
+    axios
+      .post("/api/users/" + username, reqBody)
+      .catch(err => console.log(err));
+  
+  }, [name, bio, emojiStatus]);
 
 
   return (
@@ -61,7 +83,7 @@ const Profile = (props) => {
         borderRadius="full">
           <Emoji emoji={emojiStatus} size={18} set="apple"/>
         </Button>
-        { picker && 
+        { togglePicker && 
           <Box zIndex="3" pos="absolute" top="8">
             <Picker onSelect={onEmojiClick} set="apple" perLine={8} title="" emoji=""/>
           </Box>
@@ -76,27 +98,42 @@ const Profile = (props) => {
       mt="4em"
       >
         <Container centerContent px="6">
-          <Text textStyle="h3">{name}</Text>
+          {isEditMode ? 
+            <Input placeholder={name} size="sm" textAlign="center" id="name"/>
+            :
+            <Text textStyle="h3">{name}</Text>
+          }
           <Text textStyle="h4" mt="2">@{username}</Text>
         </Container>
-        <Text textStyle="h6" mt="2" px="6">{bio}</Text>
-        <Container centerContent pos="absolute" bottom="4">
-          {isAuthenticated && username === username2 ?
-            <Button
-            variant="secondary"
-            textStyle="h3"
-            leftIcon={<Icon as={HiOutlinePencil} w={5} h={5} />}
-            >
-              Edit Profile
-            </Button>
+        <Container mt="2" px="6">
+          {isEditMode ? 
+            <Textarea placeholder={bio} size="sm" id="bio"/>
             :
-            <Button
-            variant="secondary"
-            textStyle="h3"
-            leftIcon={<Icon as={MdPersonAdd} w={5} h={5} />}
-            >
-              Follow
-            </Button>
+            <Text textStyle="h6">{bio}</Text>
+          }
+        </Container>
+        <Container centerContent pos="absolute" bottom="4">
+          { isAuthenticated && username === username2 ?
+              <Button
+              variant="secondary"
+              textStyle="h3"
+              leftIcon={<Icon as={HiOutlinePencil} w={5} h={5} />}
+              onClick={isEditMode ? onSaveProfile : onEditProfile }
+              >
+                {isEditMode ?
+                  'Save Profile'
+                  :
+                  'Edit Profile'
+                }
+              </Button>
+              :
+              <Button
+              variant="secondary"
+              textStyle="h3"
+              leftIcon={<Icon as={MdPersonAdd} w={5} h={5} />}
+              >
+                Follow
+              </Button>
           }
         </Container>
       </Box>

@@ -5,11 +5,11 @@ import ProfilePage from './ProfilePage';
 import Login from './components/Login';
 import Register from './components/Register';
 import { Provider } from "react-redux";
-import store from "./store";
+import { store, persistor } from "./store";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
-
+import { PersistGate } from 'redux-persist/integration/react'
 
 // check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -33,12 +33,14 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
-          <Route path="/" exact component={Home} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} />
-          <Route path="/user/:username" component={ProfilePage} />
-        </Router>
+        <PersistGate loading={null} persistor={persistor}>
+          <Router>
+            <Route path="/" exact component={Home} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/register" exact component={Register} />
+            <Route path="/user/:username" component={ProfilePage} />
+          </Router>
+        </PersistGate>
       </Provider>
     );
   }
