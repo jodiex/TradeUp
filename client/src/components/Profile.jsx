@@ -34,6 +34,16 @@ const Profile = (props) => {
   const onEmojiClick = (emoji) => {
     setEmojiStatus(emoji.id)
     setTogglePicker(false);
+
+    // update emoji status in db
+    const reqBody = {
+      name: name,
+      bio: bio,
+      emojiStatus: emoji.id
+    };
+    axios
+      .post("/api/users/" + username, reqBody)
+      .catch(err => console.log(err));
   };
   const onPickerClick = (e) => {
     e.preventDefault();
@@ -48,27 +58,26 @@ const Profile = (props) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const onSaveProfile = (e) => {
     e.preventDefault();
-    setName(document.getElementById("name").value);
-    setBio(document.getElementById("bio").value);
+    const nameValue = document.getElementById("name").value;
+    const bioValue = document.getElementById("bio").value;
+    setName(nameValue);
+    setBio(bioValue);
     setIsEditMode(false);
-  }
-  const onEditProfile = (e) => {
-    e.preventDefault();
-    setIsEditMode(true);
-  }
 
-  useEffect(() => {
-    // when name, bio, or emojiStatus are updated, save to db
+    // update name and bio in db
     const reqBody = {
-      name: name,
-      bio: bio,
+      name: nameValue,
+      bio: bioValue,
       emojiStatus: emojiStatus
     };
     axios
       .post("/api/users/" + username, reqBody)
       .catch(err => console.log(err));
-  
-  }, [name, bio, emojiStatus]);
+  }
+  const onEditProfile = (e) => {
+    e.preventDefault();
+    setIsEditMode(true);
+  }
 
 
   return (
@@ -99,7 +108,7 @@ const Profile = (props) => {
       >
         <Container centerContent px="6">
           {isEditMode ? 
-            <Input placeholder={name} size="sm" textAlign="center" id="name"/>
+            <Input defaultValue={name} size="sm" textAlign="center" id="name"/>
             :
             <Text textStyle="h3">{name}</Text>
           }
@@ -107,7 +116,7 @@ const Profile = (props) => {
         </Container>
         <Container mt="2" px="6">
           {isEditMode ? 
-            <Textarea placeholder={bio} size="sm" id="bio"/>
+            <Textarea defaultValue={bio} size="sm" id="bio"/>
             :
             <Text textStyle="h6">{bio}</Text>
           }

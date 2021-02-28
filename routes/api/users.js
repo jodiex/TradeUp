@@ -107,7 +107,7 @@ router.post("/login", (req, res) => {
 });
 
 // @route GET api/users/:username
-// @desc Find user profile and return user
+// @desc Find user profile and return it
 // @access Public
 router.get("/:username", (req, res) => {
   // find user by username

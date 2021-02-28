@@ -9,7 +9,7 @@ class Feed extends Component {
     return (
         <VStack w={["sm", "md", "lg", "xl", "2xl"]} ml="8" spacing={5} mt="24" mb="12">
           {this.props.mode === "profile" &&
-            <Write />}
+            <Write username={this.props.username}/>}
           {this.props.mode === "feed" &&
             <Title text="Your Feed" />}
           {this.props.mode === "user" &&

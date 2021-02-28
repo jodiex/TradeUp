@@ -16,7 +16,7 @@ class ProfilePage extends Component {
         <Flex>
           <Spacer />
           <Sidebar isProfile={true} username={username}/>
-          <Feed mode={username === username2 ? "profile" : "user"}/>
+          <Feed mode={username === username2 ? "profile" : "user"} username={username}/>
           <Spacer />
         </Flex>
         <LoginButtons />
