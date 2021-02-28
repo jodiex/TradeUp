@@ -86,7 +86,7 @@ const Profile = (props) => {
         <Button
         size="sm"
         bg="white"
-        onClick={onPickerClick}
+        onClick={isAuthenticated && (username === username2) ? onPickerClick : undefined}
         zIndex="2"
         ml="32"
         borderRadius="full">
@@ -94,7 +94,7 @@ const Profile = (props) => {
         </Button>
         { togglePicker && 
           <Box zIndex="3" pos="absolute" top="8">
-            <Picker onSelect={onEmojiClick} set="apple" perLine={8} title="" emoji=""/>
+            <Picker onSelect={isAuthenticated && (username === username2) ? onEmojiClick : undefined} set="apple" perLine={8} title="" emoji=""/>
           </Box>
         }
         <Image boxSize="10em" src="https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png?w=640" pos="absolute" borderRadius="full" />

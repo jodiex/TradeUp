@@ -41,7 +41,7 @@ class Feed extends Component {
             <Title text="Posts" />}
           {this.props.mode === "home" &&
             <Title text="Trending Posts" />}
-          <Box w={["sm", "md", "lg", "xl", "2xl"]}>
+          <Box w={["xs", "md", "lg", "xl", "2xl"]}>
             {this.state.posts.map((post) => 
               <Post key={post._id} name={this.state.name} username={post.username} tag={post.tag} text={post.text} date={post.date}/>
             )}
