@@ -26,7 +26,7 @@ const Profile = (props) => {
       .catch(err =>
         console.log(err)
       );
-  }, []);
+  }, [username]);
 
   // emoji status
   const [emojiStatus, setEmojiStatus] = useState('grinning');

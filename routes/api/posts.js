@@ -31,4 +31,29 @@ router.post("/", (req, res) => {
   });
 });
 
+
+// @route GET api/posts/:username
+// @desc Get all posts by username
+// @access Public
+router.get("/:username", (req, res) => {
+  const username = req.params.username;
+  User.findOne({ username }).then(user => {
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    
+    Post
+      .find({ username })
+      .limit(50)
+      .sort({ date: "desc" })
+      .exec((err, docs) => {
+        if (err) {
+          console.log(err);
+          return res.status(500);
+        }
+        return res.status(200).json({ name: user.name, posts: docs });
+      })
+  });
+});
+
 module.exports = router;
