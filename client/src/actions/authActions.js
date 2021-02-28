@@ -52,7 +52,7 @@ export const loginUser = (userData, history) => dispatch => {
 };
 
 // logout
-export const logoutUser = () => dispatch => {
+export const logoutUser = (history) => dispatch => {
   // remove token from local storage
   localStorage.removeItem("jwtToken");
   // remove auth header for future requests
@@ -60,7 +60,7 @@ export const logoutUser = () => dispatch => {
   // set current user to empty object {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}, ""));
   // redirect to login
-  window.location.href = "/login";
+  history.push("/login");
 };
 
 // set logged in user

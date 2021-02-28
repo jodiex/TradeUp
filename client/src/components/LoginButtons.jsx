@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 class LoginButtons extends Component {
   onLogoutClick = (e) => {
     e.preventDefault();
-    this.props.logoutUser();
+    this.props.logoutUser(this.props.history);
   };
 
   onLoginClick = (e) => {
