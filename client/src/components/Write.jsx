@@ -13,6 +13,9 @@ import {
   ModalBody,
   ModalCloseButton, } from "@chakra-ui/react";
 import axios from "axios";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getPosts } from "../actions/feedActions";
 
 class Write extends Component {
   constructor(props) {
@@ -55,6 +58,9 @@ class Write extends Component {
         text: "",
         tag: "",
       });
+
+      // re-get posts in redux state
+      this.props.getPosts(this.props.username);
     }
   };
 
@@ -138,4 +144,16 @@ class Write extends Component {
   }
 }
 
-export default Write;
+
+Write.propTypes = {
+  getPosts: PropTypes.func.isRequired,
+  feed: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => {
+  return {
+    feed: state.feed
+  };
+};
+
+export default connect(mapStateToProps, { getPosts })(Write);

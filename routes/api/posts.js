@@ -51,7 +51,18 @@ router.get("/:username", (req, res) => {
           console.log(err);
           return res.status(500);
         }
-        return res.status(200).json({ name: user.name, posts: docs });
+        let posts = [];
+        for (let d of docs) {
+          posts.push({
+            _id: d._id,
+            name: user.name,
+            username: d.username,
+            tag: d.tag,
+            text: d.text,
+            date: d.date
+          })
+        }
+        return res.status(200).json({ posts: posts});
       })
   });
 });
