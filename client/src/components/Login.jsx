@@ -4,7 +4,7 @@ import { Box, Center, Input, Text, VStack, Button, InputGroup, InputRightElement
 import Logo from "./Logo";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser } from "../actions/authActions";
+import { loginUser, clearErrors } from "../actions/authActions";
 
 class Login extends Component {
   constructor() {
@@ -12,26 +12,22 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      errors: {},
       showPassword: false
     };
   }
 
   componentDidMount() {
+    // clear errors on refresh
+    this.props.clearErrors();
     // if logged in, redirect to home
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
+  componentDidUpdate() {
+    if (this.props.auth.isAuthenticated) {
       this.props.history.push("/"); // push user to homepage when they login
-    }
-    if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors
-      });
     }
   }
 
@@ -52,7 +48,7 @@ class Login extends Component {
   handlePasswordVisibilty = () => this.setState({ showPassword: !this.state.showPassword });
 
   render() {
-    const { errors } = this.state;
+    const { errors } = this.props;
     const height = window.innerHeight
     || document.documentElement.clientHeight
     || document.body.clientHeight;
@@ -119,4 +115,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { loginUser })(withRouter(Login));
+export default connect(mapStateToProps, { loginUser, clearErrors })(withRouter(Login));

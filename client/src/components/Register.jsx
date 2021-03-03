@@ -4,7 +4,7 @@ import { Box, Center, Input, Text, VStack, Button, InputGroup, InputRightElement
 import Logo from "./Logo";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { registerUser } from "../actions/authActions";
+import { registerUser, clearErrors } from "../actions/authActions";
 
 class Register extends Component {
   constructor() {
@@ -15,24 +15,23 @@ class Register extends Component {
       email: "",
       password1: "",
       password2: "",
-      errors: {},
       showPassword1: false,
       showPassword2: false
     };
   }
 
   componentDidMount() {
+    // clear errors on refresh
+    this.props.clearErrors();
     // if logged in, redirect to home
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors
-      });
+  componentDidUpdate() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/"); // push user to homepage when they login
     }
   }
 
@@ -57,7 +56,7 @@ class Register extends Component {
   handlePassword2Visibility = () => this.setState({ showPassword2: !this.state.showPassword2 })
 
   render() {
-    const { errors } = this.state;
+    const { errors } = this.props;
     const height = window.innerHeight
     || document.documentElement.clientHeight
     || document.body.clientHeight;
@@ -150,4 +149,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+export default connect(mapStateToProps, { registerUser, clearErrors })(withRouter(Register));

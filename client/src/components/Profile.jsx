@@ -51,8 +51,8 @@ const Profile = (props) => {
   }
 
   // redux state
-  const username2 = props.auth.username;
-  const isAuthenticated = props.auth.isAuthenticated;
+  var username2 = props.auth.user ? props.auth.user.username : null;
+  var isAuthenticated = props.auth.isAuthenticated;
 
   // edit mode
   const [isEditMode, setIsEditMode] = useState(false);

@@ -19,14 +19,17 @@ if (localStorage.jwtToken) {
   // decode token and get user info and exp
   const decoded = jwt_decode(token);
   // set user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded, null));
+  store.dispatch(setCurrentUser(decoded));
 
   // check for expired token
   const currentTime = Date.now() / 1000; // in milliseconds
   if (decoded.exp < currentTime) {
-    // logout user
-    store.dispatch(logoutUser());
+    // expired user so logout user
+    store.dispatch(logoutUser(null));
   }
+} else {
+  // jwtToken does not exist so log out user
+  store.dispatch(logoutUser(null));
 }
 
 class App extends Component {

@@ -15,9 +15,9 @@ class Nav extends Component {
 
   onProfileClick = (e) => {
     e.preventDefault();
-    const { username, isAuthenticated } = this.props.auth;
-    if (isAuthenticated) {
-      this.props.history.push("/user/" + username);
+    const { user, isAuthenticated } = this.props.auth;
+    if (isAuthenticated && user !== {}) {
+      this.props.history.push("/user/" + user.username);
     } else {
       // if not logged in, profile should take them to login screen
       this.props.history.push("/login");

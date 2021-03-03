@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 class ProfilePage extends Component {
   render() {
     const username = this.props.match.params.username;
-    const username2 = this.props.auth.username;
+    const username2 = this.props.user !== {} ? this.props.user.username : null;
 
     return (
       <Fragment>
@@ -26,12 +26,12 @@ class ProfilePage extends Component {
 }
 
 ProfilePage.propTypes = {
-  auth: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    user: state.auth.user
   };
 };
 

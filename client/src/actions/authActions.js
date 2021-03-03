@@ -4,7 +4,8 @@ import jwt_decode from "jwt-decode";
 import {
   GET_ERRORS,
   SET_CURRENT_USER,
-  USER_LOADING
+  USER_LOADING,
+  CLEAR_ERRORS
 } from "./types";
 
 
@@ -32,14 +33,14 @@ export const loginUser = (userData, history) => dispatch => {
     .post("/api/users/login", userData)
     .then(res => {
       // save token to local storage
-      const { username, token } = res.data;
+      const { token } = res.data;
       localStorage.setItem("jwtToken", token);
       // set token in Auth header
       setAuthToken(token);
       // decode token to get user data
       const decoded = jwt_decode(token);
       // set current user to decoded user data
-      dispatch(setCurrentUser(decoded, username));
+      dispatch(setCurrentUser(decoded));
       // redirect to homepage on successful login
       history.push("/");
     })
@@ -58,17 +59,18 @@ export const logoutUser = (history) => dispatch => {
   // remove auth header for future requests
   setAuthToken(false);
   // set current user to empty object {} which will set isAuthenticated to false
-  dispatch(setCurrentUser({}, ""));
+  dispatch(setCurrentUser({}));
   // redirect to login
-  history.push("/login");
+  if (history) {
+    history.push("/login");
+  }
 };
 
 // set logged in user
-export const setCurrentUser = (decoded, username) => {
+export const setCurrentUser = (decoded) => {
   return {
     type: SET_CURRENT_USER,
-    payload: decoded,
-    username: username
+    payload: decoded
   };
 };
 
@@ -76,6 +78,13 @@ export const setCurrentUser = (decoded, username) => {
 export const setUserLoading = () => {
   return {
     type: USER_LOADING
+  };
+};
+
+// clear errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
   };
 };
 
