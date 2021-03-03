@@ -10,17 +10,17 @@ import PropTypes from "prop-types";
 class Nav extends Component {
   onHomeClick = (e) => {
     e.preventDefault();
-    this.props.history.push("/");
+    window.location.href = "/";
   }
 
   onProfileClick = (e) => {
     e.preventDefault();
     const { user, isAuthenticated } = this.props.auth;
     if (isAuthenticated && user !== {}) {
-      this.props.history.push("/user/" + user.username);
+      window.location.href = "/user/" + user.username;
     } else {
       // if not logged in, profile should take them to login screen
-      this.props.history.push("/login");
+      window.location.href = "/login";
     }
   }
 

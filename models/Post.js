@@ -19,6 +19,11 @@ const PostSchema = new Schema({
   date: {
     type: Date,
     required: true
+  },
+  reshared: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 });
 

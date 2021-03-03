@@ -13,12 +13,12 @@ class LoginButtons extends Component {
 
   onLoginClick = (e) => {
     e.preventDefault();
-    this.props.history.push("/login");
+    window.location.href = "/login";
   };
 
   onRegisterClick = (e) => {
     e.preventDefault();
-    this.props.history.push("/register");
+    window.location.href = "/register";
   };
 
   render() {

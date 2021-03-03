@@ -42,7 +42,7 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
-    this.props.loginUser(userData, this.props.history);
+    this.props.loginUser(userData);
   };
 
   handlePasswordVisibilty = () => this.setState({ showPassword: !this.state.showPassword });

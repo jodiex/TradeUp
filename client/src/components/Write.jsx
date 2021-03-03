@@ -48,6 +48,8 @@ class Write extends Component {
         .then(res => {
           // reset write field
           document.getElementById("text").value = "";
+          // re-get posts in redux state
+          this.props.getPosts(this.props.username);
         })
         .catch(err => {
           console.log(err);
@@ -58,9 +60,6 @@ class Write extends Component {
         text: "",
         tag: "",
       });
-
-      // re-get posts in redux state
-      this.props.getPosts(this.props.username);
     }
   };
 

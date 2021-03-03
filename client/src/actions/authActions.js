@@ -1,6 +1,7 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
+import { store } from "../store";
 import {
   GET_ERRORS,
   SET_CURRENT_USER,
@@ -10,14 +11,14 @@ import {
 
 
 // register
-export const registerUser = (newUser, history) => dispatch => {
+export const registerUser = (newUser) => dispatch => {
   axios
     .post("/api/users/register", newUser)
     .then(res => {
       dispatch(loginUser({
         username: newUser.username,
         password: newUser.password1
-      }, history))
+      }))
     })
     .catch(err =>
       dispatch({
@@ -28,7 +29,7 @@ export const registerUser = (newUser, history) => dispatch => {
 };
 
 // login
-export const loginUser = (userData, history) => dispatch => {
+export const loginUser = (userData) => dispatch => {
   axios
     .post("/api/users/login", userData)
     .then(res => {
@@ -42,7 +43,7 @@ export const loginUser = (userData, history) => dispatch => {
       // set current user to decoded user data
       dispatch(setCurrentUser(decoded));
       // redirect to homepage on successful login
-      history.push("/");
+      window.location.href = "/";
     })
     .catch(err =>
       dispatch({
