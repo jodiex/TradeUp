@@ -7,6 +7,11 @@ const PostSchema = new Schema({
     required: true,
     maxLength: 25
   },
+  author: {
+    type: String,
+    required: true,
+    maxLength: 25
+  },
   tag: {
     type: String,
     required: false

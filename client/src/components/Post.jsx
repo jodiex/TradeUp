@@ -1,7 +1,10 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import { CgHeart } from "react-icons/cg";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { Box, Text, Button, HStack, IconButton } from "@chakra-ui/react";
+import axios from "axios";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 const Post = (props) => {
   // date processing
@@ -25,6 +28,31 @@ const Post = (props) => {
   const shortMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
   const month = shortMonths[date.getMonth()];
   const day = date.getDate();
+  const year = date.getFullYear();
+
+  // on reshare click
+  const [isReshared, setIsReshared] = useState(false);
+  const onReshareClick = (e) => {
+    e.preventDefault();
+  
+    const postData = {
+      username: props.auth.username,
+      author: props.username,
+      tag: props.tag,
+      text: props.text,
+      date: new Date(),
+      reshared: true
+    };
+    
+    axios
+      .post("/api/posts/", postData)
+      .then(res => {
+        setIsReshared(true);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   return (
     <Box h={["9em", null, "9em", null, "8em"]} bg="white" borderRadius="xl" py="3" px="4" pos="relative" mb={5}>
@@ -42,12 +70,32 @@ const Post = (props) => {
       </HStack>
       <Text textStyle="h6" mt="1">{props.text}</Text>
       <HStack pos="absolute" bottom="3" left="1">
-        <IconButton aria-label="Retweet" variant="link" icon={<AiOutlineRetweet />}/>
-        <IconButton aria-label="Like" variant="link" icon={<CgHeart />}/>
-        <Text textStyle="h6" pl="1">{hour}:{mins}{isAm? "am" : "pm"}&emsp;{month} {day}</Text>
+        {props.auth.isAuthenticated &&
+          <Fragment>
+            <IconButton
+              aria-label="Reshare"
+              variant="link"
+              icon={<AiOutlineRetweet />}
+              onClick={!isReshared ? onReshareClick : undefined}
+              isActive={isReshared}/>
+            <IconButton aria-label="Like" variant="link" icon={<CgHeart />}/>
+          </Fragment>
+        }
+        <Text textStyle="h6" pl={props.auth.isAuthenticated ? "1" : "3"}>{hour}:{mins}{isAm? "am" : "pm"}&emsp;{month} {day}, {year}</Text>
       </HStack>
     </Box>
   );
 }
 
-export default Post;
+
+Post.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps)(Post);

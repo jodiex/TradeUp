@@ -38,9 +38,11 @@ class Write extends Component {
     if (this.state.text !== "") {
       const postData = {
         username: this.props.username,
+        author: this.props.username,
         tag: this.state.tag,
         text: this.state.text,
-        date: new Date()
+        date: new Date(),
+        reshared: false
       };
       
       axios

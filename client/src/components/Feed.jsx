@@ -9,7 +9,6 @@ import { getPosts } from "../actions/feedActions";
 
 class Feed extends Component {
   componentDidMount() {
-    console.log("hello")
     if (this.props.mode === "profile" || this.props.mode === "user") {
       this.props.getPosts(this.props.username);
     }
