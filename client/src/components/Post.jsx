@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { CgHeart } from "react-icons/cg";
 import { AiOutlineRetweet } from "react-icons/ai";
-import { Box, Text, Button, HStack, IconButton } from "@chakra-ui/react";
+import { Box, Text, Button, HStack, IconButton, Tag, TagLeftIcon, TagLabel } from "@chakra-ui/react";
 import axios from "axios";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -36,14 +36,15 @@ const Post = (props) => {
     e.preventDefault();
   
     const postData = {
-      username: props.auth.username,
-      author: props.username,
+      username: props.auth.user !== {} ? props.auth.user.username : "",
+      author: props.author,
+      authorName: props.authorName,
       tag: props.tag,
       text: props.text,
       date: new Date(),
       reshared: true
     };
-    
+    console.log(postData)
     axios
       .post("/api/posts/", postData)
       .then(res => {
@@ -57,8 +58,8 @@ const Post = (props) => {
   return (
     <Box h={["9em", null, "9em", null, "8em"]} bg="white" borderRadius="xl" py="3" px="4" pos="relative" mb={5}>
       <HStack>
-        <Text textStyle="h3">{props.name}</Text>
-        <Text textStyle="h4">@{props.username}</Text>
+        <Text textStyle="h3">{props.authorName}</Text>
+        <Text textStyle="h4">@{props.author}</Text>
         { props.tag && 
           <Button
           variant="secondary"
@@ -66,6 +67,12 @@ const Post = (props) => {
           size="xs">
             # {props.tag}
           </Button>
+        }
+        { props.reshared &&
+          <Tag textStyle="h6">
+            <TagLeftIcon as={AiOutlineRetweet} />
+            <TagLabel>Reshared</TagLabel>
+          </Tag>
         }
       </HStack>
       <Text textStyle="h6" mt="1">{props.text}</Text>

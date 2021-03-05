@@ -23,7 +23,9 @@ class Write extends Component {
     this.state = {
       text: "",
       tag: "",
-      openModal: false
+      openModal: false,
+      name: props.user.name ? props.user.name : "",
+      username: props.user.name ? props.user.username : ""
     };
   }
 
@@ -37,8 +39,9 @@ class Write extends Component {
     // add a new post only if text isn't empty
     if (this.state.text !== "") {
       const postData = {
-        username: this.props.username,
-        author: this.props.username,
+        username: this.state.username,
+        author: this.state.username,
+        authorName: this.state.name,
         tag: this.state.tag,
         text: this.state.text,
         date: new Date(),
@@ -51,7 +54,7 @@ class Write extends Component {
           // reset write field
           document.getElementById("text").value = "";
           // re-get posts in redux state
-          this.props.getPosts(this.props.username);
+          this.props.getPosts(this.state.username);
         })
         .catch(err => {
           console.log(err);
@@ -148,12 +151,14 @@ class Write extends Component {
 
 Write.propTypes = {
   getPosts: PropTypes.func.isRequired,
-  feed: PropTypes.object.isRequired
+  feed: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    feed: state.feed
+    feed: state.feed,
+    user: state.auth.user
   };
 };
 

@@ -12,6 +12,11 @@ const PostSchema = new Schema({
     required: true,
     maxLength: 25
   },
+  authorName: {
+    type: String,
+    required: true,
+    maxLength: 22
+  },
   tag: {
     type: String,
     required: false

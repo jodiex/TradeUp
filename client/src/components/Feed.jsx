@@ -19,7 +19,7 @@ class Feed extends Component {
     return (
         <VStack ml="8" spacing={5} mt={24} mb={7}>
           {this.props.mode === "profile" &&
-            <Write username={this.props.username}/>}
+            <Write />}
           {this.props.mode === "feed" &&
             <Title text="Your Feed" />}
           {this.props.mode === "user" &&
@@ -28,7 +28,7 @@ class Feed extends Component {
             <Title text="Trending Posts" />}
           <Box w={["xs", "md", "lg", "xl", "2xl"]}>
             {posts.map((post) => 
-              <Post key={post._id} name={post.name} username={post.username} tag={post.tag} text={post.text} date={post.date}/>
+              <Post key={post._id} authorName={post.authorName} author={post.author} tag={post.tag} text={post.text} date={post.date} reshared={post.reshared}/>
             )}
           </Box>
         </VStack>
