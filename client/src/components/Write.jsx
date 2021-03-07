@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getPosts } from "../actions/feedActions";
+import { updatePosts } from "../actions/feedActions";
 
 class Write extends Component {
   constructor(props) {
@@ -53,8 +53,8 @@ class Write extends Component {
         .then(res => {
           // reset write field
           document.getElementById("text").value = "";
-          // re-get posts in redux state
-          this.props.getPosts(this.state.username);
+          // update posts in redux state
+          this.props.updatePosts(this.state.username);
         })
         .catch(err => {
           console.log(err);
@@ -150,7 +150,7 @@ class Write extends Component {
 
 
 Write.propTypes = {
-  getPosts: PropTypes.func.isRequired,
+  updatePosts: PropTypes.func.isRequired,
   feed: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
 };
@@ -162,4 +162,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getPosts })(Write);
+export default connect(mapStateToProps, { updatePosts })(Write);

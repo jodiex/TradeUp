@@ -4,8 +4,7 @@ const theme = extendTheme({
 	colors: {
     darkPurple: '#9DA1FF',
     darkerPurple: '#6371E8',
-    lightPurple: '#E7E8F5',
-    lightGray: '#E2E1EB'
+    lightPurple: '#E7E8F5'
 	},
 	fonts: {
 		body: 'system-ui, sans-serif',
@@ -43,12 +42,12 @@ const theme = extendTheme({
         h5: {
             fontSize: ["sm", "md"],
             fontWeight: "normal",
-            color: "gray",
+            color: "gray.500",
         },
         h6: {
             fontSize: ["xs", "sm"],
             fontWeight: "normal",
-            color: "gray",
+            color: "gray.500",
         },
         h7: {
             fontSize: ["xs"],
@@ -109,7 +108,7 @@ const theme = extendTheme({
                 "navButton": {
                     bg: "white",
                     color: "black",
-                    _hover: { bg: "lightGray" },
+                    _hover: { bg: "gray.100" },
                     textStyle: "h3",
                     w: "7em"
                 },
@@ -121,19 +120,21 @@ const theme = extendTheme({
                 "sidebarButton": {
                     bg: "white",
                     color: "black",
-                    _hover: { bg: "lightGray" },
+                    _hover: { bg: "gray.100" },
                     w: "2xs",
                     textStyle: "h4"
                 },
                 "loginButton": {
                     bg: "white",
                     color: "black",
-                    _hover: { bg: "lightGray" },
+                    _hover: { bg: "gray.100" },
                     size: "3xs",
                     textStyle: "h3"
                 },
                 link: {
                     _hover: { color: "black" },
+                    _active: { color: "black" },
+                    color: "gray.400",
                     size: "md",
                 }
             }

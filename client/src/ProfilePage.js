@@ -6,10 +6,12 @@ import { Flex, Spacer } from "@chakra-ui/react"
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+const isEmpty = require("is-empty");
+
 class ProfilePage extends Component {
   render() {
     const username = this.props.match.params.username;
-    const username2 = this.props.user !== {} ? this.props.user.username : null;
+    const username2 = !isEmpty(this.props.user) ? this.props.user.username : null;
 
     return (
       <Fragment>

@@ -1,10 +1,13 @@
-import React, { Fragment, useState } from "react";
-import { CgHeart } from "react-icons/cg";
+import React, { Fragment, useEffect, useState } from "react";
+import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { Box, Text, Button, HStack, IconButton, Tag, TagLeftIcon, TagLabel } from "@chakra-ui/react";
 import axios from "axios";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { updateLikes } from "../actions/feedActions";
+
+const isEmpty = require("is-empty");
 
 const Post = (props) => {
   // date processing
@@ -34,25 +37,66 @@ const Post = (props) => {
   const [isReshared, setIsReshared] = useState(false);
   const onReshareClick = (e) => {
     e.preventDefault();
-  
-    const postData = {
-      username: props.auth.user !== {} ? props.auth.user.username : "",
-      author: props.author,
-      authorName: props.authorName,
-      tag: props.tag,
-      text: props.text,
-      date: new Date(),
-      reshared: true
-    };
-    console.log(postData)
-    axios
-      .post("/api/posts/", postData)
-      .then(res => {
-        setIsReshared(true);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    if (props.auth.isAuthenticated) {
+      const postData = {
+        username: !isEmpty(props.auth.user) ? props.auth.user.username : "",
+        author: props.author,
+        authorName: props.authorName,
+        tag: props.tag,
+        text: props.text,
+        date: new Date(),
+        reshared: true
+      };
+      axios
+        .post("/api/posts/", postData)
+        .then(res => {
+          setIsReshared(true);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
+
+  // on like click
+  const [isLiked, setIsLiked] = useState(props.liked);
+
+  const onLikeClick = (e) => {
+    e.preventDefault();
+    if (props.auth.isAuthenticated) {
+      const username = !isEmpty(props.auth.user) ? props.auth.user.username : "";
+      const likeData = {
+        post: props.id,
+        likedBy: username,
+        date: new Date()
+      };
+      axios
+        .post("/api/likes/", likeData)
+        .then(res => {
+          setIsLiked(true);
+          props.updateLikes(username);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
+
+  // on unlike click
+  const onUnlikeClick = (e) => {
+    e.preventDefault();
+    if (props.auth.isAuthenticated) {
+      const username = !isEmpty(props.auth.user) ? props.auth.user.username : "";
+      axios
+        .delete("/api/likes/" + username, { params: { post: props.id } })
+        .then(res => {
+          setIsLiked(false);
+          props.updateLikes(username);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 
   return (
@@ -85,7 +129,12 @@ const Post = (props) => {
               icon={<AiOutlineRetweet />}
               onClick={!isReshared ? onReshareClick : undefined}
               isActive={isReshared}/>
-            <IconButton aria-label="Like" variant="link" icon={<CgHeart />}/>
+            <IconButton
+              aria-label="Like"
+              variant="link"
+              icon={isLiked ? <HiHeart /> : <HiOutlineHeart />}
+              onClick={isLiked ? onUnlikeClick : onLikeClick}
+              isActive={isLiked}/>
           </Fragment>
         }
         <Text textStyle="h6" pl={props.auth.isAuthenticated ? "1" : "3"}>{hour}:{mins}{isAm? "am" : "pm"}&emsp;{month} {day}, {year}</Text>
@@ -97,6 +146,7 @@ const Post = (props) => {
 
 Post.propTypes = {
   auth: PropTypes.object.isRequired,
+  updateLikes: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
@@ -105,4 +155,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Post);
+export default connect(mapStateToProps, { updateLikes })(Post);

@@ -122,6 +122,10 @@ router.get("/:username", (req, res) => {
       bio: user.bio,
       emojiStatus: user.emojiStatus
     });
+  })
+  .catch(error => {
+    console.log(error);
+    return res.status(500);
   });
 });
 

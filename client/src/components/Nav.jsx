@@ -7,6 +7,8 @@ import { Box, Button, Icon, Flex, Spacer } from "@chakra-ui/react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+const isEmpty = require("is-empty");
+
 class Nav extends Component {
   onHomeClick = (e) => {
     e.preventDefault();
@@ -16,7 +18,7 @@ class Nav extends Component {
   onProfileClick = (e) => {
     e.preventDefault();
     const { user, isAuthenticated } = this.props.auth;
-    if (isAuthenticated && user !== {}) {
+    if (isAuthenticated && !isEmpty(user)) {
       window.location.href = "/user/" + user.username;
     } else {
       // if not logged in, profile should take them to login screen

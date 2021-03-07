@@ -55,7 +55,7 @@ router.get("/:username", (req, res) => {
           reshared: d.reshared
         });
       }
-      return res.status(200).json({ posts: posts});
+      return res.status(200).json({ posts: posts });
     })
 });
 
