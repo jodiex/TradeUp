@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from './Home';
 import ProfilePage from './ProfilePage';
+import LikesPage from './LikesPage';
 import Login from './components/Login';
 import Register from './components/Register';
 import { Provider } from "react-redux";
@@ -41,7 +42,8 @@ class App extends Component {
             <Route path="/" exact component={Home} />
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
-            <Route path="/user/:username" component={ProfilePage} />
+            <Route path="/user/:username" exact component={ProfilePage} />
+            <Route path="/user/:username/likes" exact component={LikesPage} />
           </Router>
         </PersistGate>
       </Provider>

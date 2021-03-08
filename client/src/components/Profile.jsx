@@ -8,24 +8,31 @@ import { Picker, Emoji } from 'emoji-mart';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+const isEmpty = require("is-empty");
+
 const Profile = (props) => {
   const [name, setName] = useState('');
   const username = props.username;
   const [bio, setBio] = useState('');
 
   useEffect(() => {
+    let mounted = true;
     // on component mount, get user data
     axios
       .get("/api/users/" + username)
       .then(res => {
         const { name, bio, emojiStatus } = res.data;
-        setName(name);
-        setBio(bio);
-        setEmojiStatus(emojiStatus);
+        if (mounted) {
+          setName(name);
+          setBio(bio);
+          setEmojiStatus(emojiStatus);
+        }
       })
       .catch(err =>
         console.log(err)
       );
+
+    return () => mounted = false;
   }, [username]);
 
   // emoji status
@@ -51,7 +58,7 @@ const Profile = (props) => {
   }
 
   // redux state
-  var username2 = props.auth.user ? props.auth.user.username : null;
+  var username2 = !isEmpty(props.auth.user) ? props.auth.user.username : null;
   var isAuthenticated = props.auth.isAuthenticated;
 
   // edit mode

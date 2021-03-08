@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { Box, Text, Button, HStack, IconButton, Tag, TagLeftIcon, TagLabel } from "@chakra-ui/react";

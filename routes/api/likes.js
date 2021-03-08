@@ -30,7 +30,7 @@ router.get("/:username", (req, res) => {
   const username = req.params.username;
   Like
     .find({ likedBy: username })
-    .populate()
+    .populate('post')
     .sort({ date: "desc" })
     .exec((err, docs) => {
       if (err) {
@@ -38,10 +38,24 @@ router.get("/:username", (req, res) => {
         return res.status(500);
       }
       let likes = [];
+      let posts = [];
       for (let d of docs) {
         likes.push(d.post._id);
+        posts.push({
+          _id: d.post._id,
+          username: d.post.username,
+          author: d.post.author,
+          authorName: d.post.authorName,
+          tag: d.post.tag,
+          text: d.post.text,
+          date: d.post.date,
+          reshared: d.post.reshared
+        })
       }
-      return res.status(200).json({ likes: likes });
+      return res.status(200).json({
+        likes: likes,
+        posts: posts
+      });
     })
 });
 

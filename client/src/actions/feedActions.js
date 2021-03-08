@@ -7,20 +7,24 @@ import {
 
 
 // update posts in state from db
-export const updatePosts = (username) => dispatch => {
-  axios
-    .get("/api/posts/" + username)
-    .then(res => {
-      dispatch(setPosts(
-        res.data.posts
-      ))
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
+export const updateProfilePosts = (username) => dispatch => {
+  if (username) {
+    axios
+      .get("/api/posts/" + username)
+      .then(res => {
+        dispatch(setPosts(
+          res.data.posts
+        ))
       })
-    });
+      .catch(err => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      });
+  } else {
+    dispatch(setPosts([]));
+  }
 };
 
 // set posts
@@ -59,4 +63,25 @@ export const setLikes = (likes) => {
     type: SET_LIKES,
     likes: likes
   };
+};
+
+// update posts in state to liked posts from db
+export const updateLikedPosts = (username) => dispatch => {
+  if (username) {
+    axios
+      .get("/api/likes/" + username)
+      .then(res => {
+        dispatch(setPosts(
+          res.data.posts
+        ))
+      })
+      .catch(err => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      });
+  } else {
+    dispatch(setPosts([]))
+  }
 };

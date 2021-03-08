@@ -61,8 +61,8 @@ const theme = extendTheme({
 	fontWeights: {
 		normal: 400,
 		medium: 500,
-        semibold: 700,
-        bold: 900,
+    semibold: 700,
+    bold: 900,
 	},
 	lineHeights: {
 		normal: 'normal',

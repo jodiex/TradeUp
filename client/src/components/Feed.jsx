@@ -5,17 +5,21 @@ import Write from './Write';
 import Title from './Title';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { updatePosts, updateLikes } from "../actions/feedActions";
+import { updateProfilePosts, updateLikes, updateLikedPosts } from "../actions/feedActions";
 
 const isEmpty = require("is-empty");
 
 class Feed extends Component {
   componentDidMount() {
     if (this.props.mode === "profile" || this.props.mode === "user") {
-      this.props.updatePosts(this.props.username);
+      this.props.updateProfilePosts(this.props.username);
     }
     if (this.props.auth.isAuthenticated) {
       this.props.updateLikes(!isEmpty(this.props.auth.user) ? this.props.auth.user.username : "");
+      if (this.props.mode === "likes") {
+        // set posts to liked posts
+        this.props.updateLikedPosts(this.props.username);
+      }
     }
   }
 
@@ -31,6 +35,8 @@ class Feed extends Component {
             <Title text="Posts" />}
           {this.props.mode === "home" &&
             <Title text="Trending Posts" />}
+          {this.props.mode === "likes" &&
+            <Title text="Likes" />}
           <Box w={["xs", "md", "lg", "xl", "2xl"]}>
             {posts.map((post) => 
               <Post
@@ -53,8 +59,9 @@ class Feed extends Component {
 
 
 Feed.propTypes = {
-  updatePosts: PropTypes.func.isRequired,
+  updateProfilePosts: PropTypes.func.isRequired,
   updateLikes: PropTypes.func.isRequired,
+  updateLikedPosts: PropTypes.func.isRequired,
   feed: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -66,4 +73,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { updatePosts, updateLikes })(Feed);
+export default connect(mapStateToProps, { updateProfilePosts, updateLikes, updateLikedPosts })(Feed);
