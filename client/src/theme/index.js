@@ -2,9 +2,10 @@ import { extendTheme } from "@chakra-ui/react"
 
 const theme = extendTheme({
 	colors: {
-    darkPurple: '#9DA1FF',
-    darkerPurple: '#6371E8',
-    lightPurple: '#E7E8F5'
+    darkPurple: '#BA9CFB',
+    darkerPurple: '#9069E1',
+    lightPurple: '#DEE0F1',
+    lightRed: '#EFD3D5'
 	},
 	fonts: {
 		body: 'system-ui, sans-serif',
@@ -84,7 +85,8 @@ const theme = extendTheme({
     styles: {
         global: (props) => ({
             body: {
-                bg: 'lightPurple',
+                backgroundImage: 'linear-gradient(#DEE0F1, #EFD3D5)',
+                backgroundAttachment: 'fixed',
                 overscrollBehaviorY: 'none'
             },
         }),
