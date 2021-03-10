@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from "react";
+// import { Link } from "react-router-dom";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import { AiOutlineRetweet } from "react-icons/ai";
-import { Box, Text, Button, HStack, IconButton, Tag, TagLeftIcon, TagLabel } from "@chakra-ui/react";
+import { Box, Text, Button, HStack, IconButton, Tag, TagLeftIcon, TagLabel, Link } from "@chakra-ui/react";
 import axios from "axios";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -103,7 +104,9 @@ const Post = (props) => {
     <Box h={["9em", null, "9em", null, "8em"]} bg="white" borderRadius="xl" py="3" px="4" pos="relative" mb={5}>
       <HStack>
         <Text textStyle="h3">{props.authorName}</Text>
-        <Text textStyle="h4">@{props.author}</Text>
+        <Link textStyle="h4" href={"/user/" + props.author} _hover={{ color: "black" }}>
+          @{props.author}
+        </Link>
         { props.tag && 
           <Button
           variant="secondary"

@@ -14,6 +14,12 @@ const Profile = (props) => {
   const [name, setName] = useState('');
   const username = props.username;
   const [bio, setBio] = useState('');
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  // redux state
+  var username2 = !isEmpty(props.auth.user) ? props.auth.user.username : null;
+  var userId = !isEmpty(props.auth.user) ? props.auth.user.id : null;
+  var isAuthenticated = props.auth.isAuthenticated;
 
   useEffect(() => {
     let mounted = true;
@@ -31,6 +37,20 @@ const Profile = (props) => {
       .catch(err =>
         console.log(err)
       );
+      
+    if (isAuthenticated) {
+      axios
+        .get("/api/follows/" + username, { params: { follower: userId } })
+        .then(res => {
+          const { follow } = res.data;
+          if (mounted) {
+            setIsFollowing(follow);
+          }
+        })
+        .catch(err =>
+          console.log(err)
+        );
+    }
 
     return () => mounted = false;
   }, [username]);
@@ -57,10 +77,6 @@ const Profile = (props) => {
     setTogglePicker((state) => !state);
   }
 
-  // redux state
-  var username2 = !isEmpty(props.auth.user) ? props.auth.user.username : null;
-  var isAuthenticated = props.auth.isAuthenticated;
-
   // edit mode
   const [isEditMode, setIsEditMode] = useState(false);
   const onSaveProfile = (e) => {
@@ -84,6 +100,44 @@ const Profile = (props) => {
   const onEditProfile = (e) => {
     e.preventDefault();
     setIsEditMode(true);
+  }
+
+  // follow
+  const onFollowClick = (e) => {
+    if (!isAuthenticated) {
+      // redirect to login if not authed
+      window.location.href = "/login";
+    } else {
+      e.preventDefault();
+      // add new follow to db
+      const followBody = {
+        name: name,
+        follower: userId,
+        date: new Date()
+      };
+      axios
+        .post("/api/follows/" + username, followBody)
+        .then(res => {
+          setIsFollowing(true);
+        })
+        .catch(err => console.log(err));
+    }
+  }
+
+  const onUnfollowClick = (e) => {
+    if (!isAuthenticated) {
+      // redirect to login if not authed
+      window.location.href = "/login";
+    } else {
+      e.preventDefault();
+      // delete follow
+      axios
+        .delete("/api/follows/" + username, { params: { follower: userId } })
+        .then(res => {
+          setIsFollowing(false);
+        })
+        .catch(err => console.log(err));
+    }
   }
 
 
@@ -144,11 +198,16 @@ const Profile = (props) => {
               </Button>
               :
               <Button
-              variant="secondary"
+              variant={isFollowing ? "outline" : "secondary"}
               textStyle="h3"
-              leftIcon={<Icon as={MdPersonAdd} w={5} h={5} />}
+              leftIcon={!isFollowing && <Icon as={MdPersonAdd} w={5} h={5} />}
+              onClick={isFollowing ? onUnfollowClick : onFollowClick }
               >
-                Follow
+                {isFollowing ?
+                  'Unfollow'
+                  :
+                  'Follow'
+                }
               </Button>
           }
         </Container>

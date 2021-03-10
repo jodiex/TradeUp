@@ -1,7 +1,19 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { MdPersonOutline } from "react-icons/md";
 import { CgAdd, CgHeart } from "react-icons/cg";
-import { Stack, Button, Icon } from "@chakra-ui/react"
+import {
+  Stack,
+  Button,
+  Icon,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton, 
+  Divider,
+  ModalFooter
+} from "@chakra-ui/react"
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -12,6 +24,7 @@ class ProfileStats extends Component {
     super(props);
     this.state = {
       username: props.username,
+      openModal: false,
       numLikes: 0
     }
   }
@@ -25,9 +38,29 @@ class ProfileStats extends Component {
     }
   }
 
-  navToLikes = (e) => {
+  navToLikesPage = (e) => {
     e.preventDefault();
     window.location.href = "/user/" + this.state.username + "/likes";
+  }
+
+  onToggleModal = (e) => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      openModal: !prevState.openModal
+    }));
+  }
+
+  onClose = () => {
+    this.setState({ openModal: false });
+  }
+
+  onAddTag = (e) => {
+    e.preventDefault();
+    this.setState({
+      tag: document.getElementById("tag").value
+    });
+    // close modal, resets tag field
+    this.onClose()
   }
 
   render() {
@@ -35,19 +68,42 @@ class ProfileStats extends Component {
     const isAuthenticated = this.props.auth.isAuthenticated;
     const isAuthedUser = isAuthenticated && (this.state.username === username2);
     return (
-      <Stack w="2xs" direction="column" spacing={4} align="center">
-        <Button variant="sidebarButton" leftIcon={<Icon as={CgAdd} w={5} h={5} />}>320 Following</Button>
-        <Button variant="sidebarButton" leftIcon={<Icon as={MdPersonOutline} w={5} h={5} />}>9.6k Followers</Button>
-        {isAuthedUser && 
+      <Fragment>
+        <Modal scrollBehavior="inside" motionPreset="slideInBottom" isOpen={this.state.openModal} onClose={this.onClose} size="lg">
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Following</ModalHeader>
+            <ModalCloseButton onClose={this.onToggleModal} />
+            <ModalBody>
+              Hello
+              <Divider />
+              Hello
+              <Divider />
+              Hello
+            </ModalBody>
+            <ModalFooter />
+          </ModalContent>
+        </Modal>
+        <Stack w="2xs" direction="column" spacing={4} align="center">
           <Button
-            variant="sidebarButton"
-            leftIcon={<Icon as={CgHeart} w={5} h={5} />}
-            onClick={this.navToLikes}
+            variant="sidebarButton" 
+            leftIcon={<Icon as={CgAdd} w={5} h={5} />}
+            onClick={this.onToggleModal}
           >
-            {this.state.numLikes === 1 ? "1 Like" : this.state.numLikes + " Likes"}
+            320 Following
           </Button>
-        }
-      </Stack>
+          <Button variant="sidebarButton" leftIcon={<Icon as={MdPersonOutline} w={5} h={5} />}>9.6k Followers</Button>
+          {isAuthedUser && 
+            <Button
+              variant="sidebarButton"
+              leftIcon={<Icon as={CgHeart} w={5} h={5} />}
+              onClick={this.navToLikesPage}
+            >
+              {this.state.numLikes === 1 ? "1 Like" : this.state.numLikes + " Likes"}
+            </Button>
+          }
+        </Stack>
+      </Fragment>
     );
   }
 }

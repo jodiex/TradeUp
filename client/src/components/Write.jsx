@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Box,
   Input,
@@ -11,7 +11,7 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton, } from "@chakra-ui/react";
+  ModalCloseButton } from "@chakra-ui/react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -90,7 +90,7 @@ class Write extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <Box w={["sm", "md", "lg", "xl", "2xl"]}>
           <form onSubmit={this.handleSubmit}>
             <Input
@@ -143,7 +143,7 @@ class Write extends Component {
             </ModalFooter>
           </ModalContent>
         </Modal>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }

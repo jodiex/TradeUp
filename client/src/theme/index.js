@@ -138,6 +138,15 @@ const theme = extendTheme({
                     _active: { color: "black" },
                     color: "gray.400",
                     size: "md",
+                },
+                outline: {
+                    color: "darkerPurple",
+                    borderColor: "darkerPurple",
+                    border: "2px",
+                    _hover: {
+                      color: "red.500",
+                      borderColor: "red.500"
+                    }
                 }
             }
         },

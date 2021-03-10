@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const Like = require("../../models/Like");
-const Post = require("../../models/Post");
 
 // @route POST api/likes/
 // @desc Add new like to post
