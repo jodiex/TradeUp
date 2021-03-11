@@ -12,9 +12,13 @@ import {
   ModalBody,
   ModalCloseButton, 
   Divider,
-  ModalFooter
+  ModalFooter,
+  Flex,
+  Spacer,
+  Avatar
 } from "@chakra-ui/react"
 import { connect } from "react-redux";
+import axios from "axios";
 import PropTypes from "prop-types";
 
 const isEmpty = require("is-empty");
@@ -25,7 +29,10 @@ class ProfileStats extends Component {
     this.state = {
       username: props.username,
       openModal: false,
-      numLikes: 0
+      numLikes: 0,
+      following: [],
+      followers: [],
+      isFollowingModal: true
     }
   }
 
@@ -36,6 +43,23 @@ class ProfileStats extends Component {
     if (isAuthedUser) {
       this.setState({ numLikes: this.props.feed.likes.length })
     }
+    axios
+      .get("/api/follows/" + this.state.username + "/following")
+      .then(res => {
+        this.setState({
+          following: res.data.following
+        });
+      })
+      .catch(err => console.log(err));
+      
+    axios
+      .get("/api/follows/" + this.state.username + "/followers")
+      .then(res => {
+        this.setState({
+          followers: res.data.followers
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   navToLikesPage = (e) => {
@@ -43,10 +67,20 @@ class ProfileStats extends Component {
     window.location.href = "/user/" + this.state.username + "/likes";
   }
 
-  onToggleModal = (e) => {
+  onToggleFollowingModal = (e) => {
     e.preventDefault();
     this.setState(prevState => ({
-      openModal: !prevState.openModal
+      openModal: !prevState.openModal,
+      isFollowingModal: true
+    }));
+  }
+
+  onToggleFollowerModal = (e) => {
+    e.preventDefault();
+    // open modal and set modal to "following" mode
+    this.setState(prevState => ({
+      openModal: !prevState.openModal,
+      isFollowingModal: false
     }));
   }
 
@@ -72,14 +106,30 @@ class ProfileStats extends Component {
         <Modal scrollBehavior="inside" motionPreset="slideInBottom" isOpen={this.state.openModal} onClose={this.onClose} size="lg">
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Following</ModalHeader>
+            <ModalHeader>{this.state.isFollowingModal ? 'Following' : 'Followers'}</ModalHeader>
             <ModalCloseButton onClose={this.onToggleModal} />
             <ModalBody>
-              Hello
-              <Divider />
-              Hello
-              <Divider />
-              Hello
+              {this.state.isFollowingModal ? 
+                this.state.following.map((f) => 
+                  <Fragment key={f.id}>
+                    <Divider />
+                    <Flex my="2">
+                      <Avatar size="xs" name={f.name} src="https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png?w=640" />
+                      &ensp;{f.name} @{f.username}
+                    </Flex>
+                  </Fragment>
+                )
+                :
+                this.state.followers.map((f) => 
+                  <Fragment key={f.id}>
+                    <Divider />
+                    <Flex my="2">
+                      <Avatar size="xs" name={f.name} src="https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png?w=640" />
+                      &ensp;{f.name} @{f.username}
+                    </Flex>
+                  </Fragment>
+                )
+              }
             </ModalBody>
             <ModalFooter />
           </ModalContent>
@@ -88,11 +138,17 @@ class ProfileStats extends Component {
           <Button
             variant="sidebarButton" 
             leftIcon={<Icon as={CgAdd} w={5} h={5} />}
-            onClick={this.onToggleModal}
+            onClick={this.onToggleFollowingModal}
           >
-            320 Following
+            {this.state.following.length} Following
           </Button>
-          <Button variant="sidebarButton" leftIcon={<Icon as={MdPersonOutline} w={5} h={5} />}>9.6k Followers</Button>
+          <Button
+            variant="sidebarButton"
+            leftIcon={<Icon as={MdPersonOutline} w={5} h={5} />}
+            onClick={this.onToggleFollowerModal}
+          >
+            {this.state.followers.length === 1 ? "1 Follower" : this.state.followers.length + " Followers"}
+          </Button>
           {isAuthedUser && 
             <Button
               variant="sidebarButton"

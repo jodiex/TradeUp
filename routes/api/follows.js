@@ -65,6 +65,7 @@ router.get("/:username/followers", (req, res) => {
       let followers = [];
       for (let d of docs) {
         followers.push({
+          id: d._id,
           username: d.follower.username,
           name: d.follower.name
         })
@@ -98,6 +99,7 @@ router.get("/:username/following", (req, res) => {
           let following = [];
           for (let d of docs) {
             following.push({
+              id: d._id,
               username: d.username,
               name: d.name
             })
