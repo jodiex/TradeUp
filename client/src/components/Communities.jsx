@@ -12,7 +12,7 @@ class Communities extends Component {
         borderRadius="2xl"
         >
             <Container p="4">
-                <Text textStyle="h3">Popular Communities&ensp;<Icon as={MdPeople} w={5} h={5} /></Text>
+                <Text textStyle="h2">Popular Communities&ensp;<Icon as={MdPeople} w={5} h={5} /></Text>
                 <Flex mt="2">
                     <Text textStyle="h5"># The Walking Dead</Text>
                     <Spacer />

@@ -85,3 +85,20 @@ export const updateLikedPosts = (username) => dispatch => {
     dispatch(setPosts([]))
   }
 };
+
+// update posts in state to trending posts
+export const updateTrendingPosts = () => dispatch => {
+  axios
+    .get("/api/posts/trending")
+    .then(res => {
+      dispatch(setPosts(
+        res.data.posts
+      ))
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    });
+};

@@ -30,10 +30,14 @@ const theme = extendTheme({
             fontFamily: "IBM Plex Serif",
             lineHeight: "110%"
         },
-        h3: {
+        h2: {
             fontSize: ["sm", "md"],
             fontWeight: "semibold",
             lineHeight: "110%",
+        },
+        h3: {
+          fontSize: ["sm", "md"],
+          fontWeight: "medium",
         },
         h4: {
             fontSize: ["sm", "md"],
@@ -111,7 +115,7 @@ const theme = extendTheme({
                     bg: "white",
                     color: "black",
                     _hover: { bg: "gray.100" },
-                    textStyle: "h3",
+                    textStyle: "h2",
                     w: "7em"
                 },
                 "secondary": {
@@ -131,7 +135,7 @@ const theme = extendTheme({
                     color: "black",
                     _hover: { bg: "gray.100" },
                     size: "3xs",
-                    textStyle: "h3"
+                    textStyle: "h2"
                 },
                 link: {
                     _hover: { color: "black" },

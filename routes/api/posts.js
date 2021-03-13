@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Post = require("../../models/Post");
+const Like = require("../../models/Like");
 
 // @route POST api/posts
 // @desc Add new post
@@ -24,6 +25,48 @@ router.post("/", (req, res) => {
       console.log(error);
       return res.status(500);
     });
+});
+
+// @route GET api/posts/trending
+// @desc Get trending (most liked) posts within the last 7 days
+// @access Public
+router.get("/trending", (req, res) => {
+  var d = new Date();
+  d.setDate(d.getDate()-7);
+
+  Like.aggregate([
+    {
+      $group: {
+        _id: '$post',
+        count: { $sum: 1 }
+      }
+    },
+    {
+      $lookup: {
+          from: "posts",
+          localField: "_id",
+          foreignField: "_id",
+          as: "post"
+      }
+    }
+  ])
+  .sort({ count: "desc" })
+  .limit(25)
+  .exec((err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(500);
+    }
+    var posts = docs.map(doc => {
+      if (doc.post && doc.post.length > 0) {
+        return doc.post[0]
+      }
+      // there shouldn't be null posts
+      return null;
+    })
+    posts = posts.filter(post => post !== null);
+    return res.status(200).json({ posts: posts });
+  })
 });
 
 

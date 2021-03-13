@@ -15,7 +15,8 @@ import {
   ModalFooter,
   Flex,
   Spacer,
-  Avatar
+  Avatar,
+  Link
 } from "@chakra-ui/react"
 import { connect } from "react-redux";
 import axios from "axios";
@@ -113,9 +114,12 @@ class ProfileStats extends Component {
                 this.state.following.map((f) => 
                   <Fragment key={f.id}>
                     <Divider />
-                    <Flex my="2">
+                    <Flex my="2" textStyle="h3">
                       <Avatar size="xs" name={f.name} src="https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png?w=640" />
-                      &ensp;{f.name} @{f.username}
+                      &ensp;{f.name}&thinsp;
+                      <Link href={"/user/" + f.username} _hover={{ color: "black" }}>
+                        @{f.username}
+                      </Link>
                     </Flex>
                   </Fragment>
                 )
@@ -123,9 +127,12 @@ class ProfileStats extends Component {
                 this.state.followers.map((f) => 
                   <Fragment key={f.id}>
                     <Divider />
-                    <Flex my="2">
+                    <Flex my="2" textStyle="h3">
                       <Avatar size="xs" name={f.name} src="https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png?w=640" />
-                      &ensp;{f.name} @{f.username}
+                      &ensp;{f.name}&thinsp;
+                      <Link href={"/user/" + f.username} _hover={{ color: "black" }}>
+                        @{f.username}
+                      </Link>
                     </Flex>
                   </Fragment>
                 )

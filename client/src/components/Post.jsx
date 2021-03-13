@@ -103,7 +103,7 @@ const Post = (props) => {
   return (
     <Box h={["9em", null, "9em", null, "8em"]} bg="white" borderRadius="xl" py="3" px="4" pos="relative" mb={5}>
       <HStack>
-        <Text textStyle="h3">{props.authorName}</Text>
+        <Text textStyle="h2">{props.authorName}</Text>
         <Link textStyle="h4" href={"/user/" + props.author} _hover={{ color: "black" }}>
           @{props.author}
         </Link>

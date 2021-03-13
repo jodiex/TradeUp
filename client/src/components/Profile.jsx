@@ -171,7 +171,7 @@ const Profile = (props) => {
           {isEditMode ? 
             <Input defaultValue={name} size="sm" textAlign="center" id="name"/>
             :
-            <Text textStyle="h3">{name}</Text>
+            <Text textStyle="h2">{name}</Text>
           }
           <Text textStyle="h4" mt="2">@{username}</Text>
         </Container>
@@ -186,7 +186,7 @@ const Profile = (props) => {
           { isAuthenticated && username === username2 ?
               <Button
               variant="secondary"
-              textStyle="h3"
+              textStyle="h2"
               leftIcon={<Icon as={HiOutlinePencil} w={5} h={5} />}
               onClick={isEditMode ? onSaveProfile : onEditProfile }
               >
@@ -199,7 +199,7 @@ const Profile = (props) => {
               :
               <Button
               variant={isFollowing ? "outline" : "secondary"}
-              textStyle="h3"
+              textStyle="h2"
               leftIcon={!isFollowing && <Icon as={MdPersonAdd} w={5} h={5} />}
               onClick={isFollowing ? onUnfollowClick : onFollowClick }
               >
