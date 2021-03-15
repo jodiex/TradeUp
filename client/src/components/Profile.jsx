@@ -25,7 +25,7 @@ const Profile = (props) => {
     let mounted = true;
     // on component mount, get user data
     axios
-      .get("/api/users/" + username)
+      .get("/api/users/user/" + username)
       .then(res => {
         const { name, bio, emojiStatus } = res.data;
         if (mounted) {
@@ -69,7 +69,7 @@ const Profile = (props) => {
       emojiStatus: emoji.id
     };
     axios
-      .post("/api/users/" + username, reqBody)
+      .put("/api/users/user/" + username, reqBody)
       .catch(err => console.log(err));
   };
   const onPickerClick = (e) => {
@@ -94,7 +94,7 @@ const Profile = (props) => {
       emojiStatus: emojiStatus
     };
     axios
-      .post("/api/users/" + username, reqBody)
+      .put("/api/users/user/" + username, reqBody)
       .catch(err => console.log(err));
   }
   const onEditProfile = (e) => {

@@ -13,7 +13,7 @@ class Home extends Component {
         <Flex>
           <Spacer />
           <Sidebar isProfile={false}/>
-          <Feed mode={this.props.auth.isAuthenticated ? "feed" : "trending"}/>
+          <Feed mode={this.props.auth.isAuthenticated ? "feed" : "trending"} username=""/>
           <Spacer />
         </Flex>
         <LoginButtons />

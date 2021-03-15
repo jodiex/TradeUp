@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { VStack, Box } from "@chakra-ui/react";
+import { VStack, Box, Text } from "@chakra-ui/react";
 import Post from './Post';
 import Write from './Write';
 import Title from './Title';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { updateProfilePosts, updateLikes, updateLikedPosts, updateTrendingPosts } from "../actions/feedActions";
+import { updateProfilePosts, updateLikes, updateLikedPosts, updateTrendingPosts, updateFeedPosts } from "../actions/feedActions";
 
 const isEmpty = require("is-empty");
 
@@ -19,11 +19,13 @@ class Feed extends Component {
       this.props.updateTrendingPosts();
     }
     if (this.props.auth.isAuthenticated) {
-      // update liked posts
+      // update total liked posts
       this.props.updateLikes(!isEmpty(this.props.auth.user) ? this.props.auth.user.username : "");
       if (this.props.mode === "likes") {
         // set posts to only liked posts
         this.props.updateLikedPosts(this.props.username);
+      } else if (this.props.mode === "feed") {
+        this.props.updateFeedPosts(!isEmpty(this.props.auth.user) ? this.props.auth.user.username : "");
       }
     }
   }
@@ -43,19 +45,23 @@ class Feed extends Component {
           {this.props.mode === "likes" &&
             <Title text="Likes" />}
           <Box w={["xs", "md", "lg", "xl", "2xl"]}>
-            {posts.map((post) => 
-              <Post
-                key={post._id}
-                id={post._id}
-                authorName={post.authorName}
-                author={post.author}
-                tag={post.tag}
-                text={post.text}
-                date={post.date}
-                reshared={post.reshared}
-                liked={likes.includes(post._id)}
-              />
-            )}
+            {posts.length > 0 ?
+              posts.map((post) => 
+                <Post
+                  key={post._id}
+                  id={post._id}
+                  authorName={post.authorName}
+                  author={post.author}
+                  tag={post.tag}
+                  text={post.text}
+                  date={post.date}
+                  reshared={post.reshared}
+                  liked={likes.includes(post._id)}
+                />
+              )
+              :
+              <Text>No posts yet. Follow a user to get started!</Text>
+            }
           </Box>
         </VStack>
     );
@@ -68,6 +74,7 @@ Feed.propTypes = {
   updateLikes: PropTypes.func.isRequired,
   updateLikedPosts: PropTypes.func.isRequired,
   updateTrendingPosts: PropTypes.func.isRequired,
+  updateFeedPosts: PropTypes.func.isRequired,
   feed: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -79,4 +86,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { updateProfilePosts, updateLikes, updateLikedPosts, updateTrendingPosts })(Feed);
+export default connect(mapStateToProps, { updateProfilePosts, updateLikes, updateLikedPosts, updateTrendingPosts, updateFeedPosts })(Feed);

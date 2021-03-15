@@ -27,6 +27,38 @@ router.post("/", (req, res) => {
     });
 });
 
+// @route GET api/posts/user/:username
+// @desc Get all posts by username
+// @access Public
+router.get("/user/:username", (req, res) => {
+  const username = req.params.username;
+    
+  Post
+    .find({ username })
+    .sort({ date: "desc" })
+    .limit(50)
+    .exec((err, docs) => {
+      if (err) {
+        console.log(err);
+        return res.status(500);
+      }
+      let posts = [];
+      for (let d of docs) {
+        posts.push({
+          _id: d._id,
+          username: d.username,
+          author: d.author,
+          authorName: d.authorName,
+          tag: d.tag,
+          text: d.text,
+          date: d.date,
+          reshared: d.reshared
+        });
+      }
+      return res.status(200).json({ posts: posts });
+    })
+});
+
 // @route GET api/posts/trending
 // @desc Get trending (most liked) posts within the last 7 days
 // @access Public
@@ -51,7 +83,7 @@ router.get("/trending", (req, res) => {
     }
   ])
   .sort({ count: "desc" })
-  .limit(25)
+  .limit(50)
   .exec((err, docs) => {
     if (err) {
       console.log(err);
@@ -70,35 +102,21 @@ router.get("/trending", (req, res) => {
 });
 
 
-// @route GET api/posts/:username
-// @desc Get all posts by username
+// @route GET api/posts/feed
+// @desc Get the posts for a user's feed (from a following list)
 // @access Public
-router.get("/:username", (req, res) => {
-  const username = req.params.username;
-    
+router.get("/feed", (req, res) => {
+  var following = req.query.following ? req.query.following : [];
   Post
-    .find({ username })
-    .limit(25)
+    .find({username: {$in: following }})
     .sort({ date: "desc" })
+    .limit(50)
     .exec((err, docs) => {
       if (err) {
         console.log(err);
         return res.status(500);
       }
-      let posts = [];
-      for (let d of docs) {
-        posts.push({
-          _id: d._id,
-          username: d.username,
-          author: d.author,
-          authorName: d.authorName,
-          tag: d.tag,
-          text: d.text,
-          date: d.date,
-          reshared: d.reshared
-        });
-      }
-      return res.status(200).json({ posts: posts });
+      return res.status(200).json({ posts: docs });
     })
 });
 

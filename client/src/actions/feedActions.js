@@ -10,7 +10,7 @@ import {
 export const updateProfilePosts = (username) => dispatch => {
   if (username) {
     axios
-      .get("/api/posts/" + username)
+      .get("/api/posts/user/" + username)
       .then(res => {
         dispatch(setPosts(
           res.data.posts
@@ -101,4 +101,31 @@ export const updateTrendingPosts = () => dispatch => {
         payload: err.response.data
       })
     });
+};
+
+
+// update posts in state to feed posts
+export const updateFeedPosts = (username) => dispatch => {
+  if (username) {
+    axios
+      .get("/api/follows/" + username + "/following")
+      .then(res => {
+        var following = res.data.following ? res.data.following : [];
+        following = following.map(follow => follow.username);
+        return axios.get("/api/posts/feed", { params: { following: following }});
+      })
+      .then(res => {
+        dispatch(setPosts(
+          res.data.posts
+        ))
+      })
+      .catch(err => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      });
+  } else {
+    dispatch(setPosts([]))
+  }
 };

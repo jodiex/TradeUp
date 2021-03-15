@@ -106,10 +106,10 @@ router.post("/login", (req, res) => {
   });
 });
 
-// @route GET api/users/:username
+// @route GET api/users/user/:username
 // @desc Find user profile and return it
 // @access Public
-router.get("/:username", (req, res) => {
+router.get("/user/:username", (req, res) => {
   // find user by username
   const username = req.params.username;
   User.findOne({ username }).then(user => {
@@ -129,10 +129,10 @@ router.get("/:username", (req, res) => {
   });
 });
 
-// @route POST api/users/:username
+// @route PUT api/users/user/:username
 // @desc Set user profile details
 // @access Public
-router.post("/:username", (req, res) => {
+router.put("/user/:username", (req, res) => {
   // find user by username
   const username = req.params.username;
   const newUserProfile = {
