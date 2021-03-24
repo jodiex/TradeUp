@@ -6,7 +6,8 @@ import {
 
 const initialState = {
   posts: [],
-  likes: []
+  likes: [],
+  communities: []
 };
 
 
@@ -21,6 +22,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         likes: action.likes
+      };
+    case SET_COMMUNITIES:
+      return {
+        ...state,
+        communities: action.communities
       };
     default:
       return state;

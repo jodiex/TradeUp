@@ -2,7 +2,8 @@ import axios from "axios";
 import {
   GET_ERRORS,
   SET_POSTS,
-  SET_LIKES
+  SET_LIKES,
+  SET_COMMUNITIES
 } from "./types";
 
 
@@ -128,4 +129,33 @@ export const updateFeedPosts = (username) => dispatch => {
   } else {
     dispatch(setPosts([]))
   }
+};
+
+// update communities in state
+export const updateCommunities = (username) => dispatch => {
+  if (username) {
+    axios
+      .get("/api/communities/" + username + "/joined")
+      .then(res => {
+        const joined = res.data.joined ? res.data.joined : [];
+        dispatch(setCommunities(joined))
+      })
+      .catch(err => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      });
+  } else {
+    dispatch(setCommunities([]))
+  }
+};
+
+
+// set communities
+export const setCommunities = (communities) => {
+  return {
+    type: SET_COMMUNITIES,
+    communities: communities
+  };
 };
