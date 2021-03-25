@@ -131,7 +131,7 @@ export const updateFeedPosts = (username) => dispatch => {
   }
 };
 
-// update communities in state
+// update joined communities in state
 export const updateCommunities = (username) => dispatch => {
   if (username) {
     axios

@@ -10,6 +10,7 @@ router.post("/follow/:name", (req, res) => {
   const newCommunityFollow = new CommunityFollow({
     name: req.params.name,
     follower: req.body.follower,
+    date: req.body.date
   });
 
   newCommunityFollow
@@ -45,10 +46,10 @@ router.get("/follow/:name", (req, res) => {
     });
 });
 
-// @route GET api/communities/:username/joined
+// @route GET api/communities/joined/:username/
 // @desc Get all communities the user joined
 // @access Public
-router.get("/:username/joined", (req, res) => {
+router.get("/joined/:username/", (req, res) => {
   const username = req.params.username;
   User
     .findOne({ username: username })
@@ -110,6 +111,13 @@ router.get("/trending", (req, res) => {
   d.setDate(d.getDate()-7);
 
   CommunityFollow.aggregate([
+    {
+      $match: {
+        date: {
+          $gte: d
+        }
+      }
+    },
     {
       $group: {
         _id: '$name',

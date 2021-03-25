@@ -1,6 +1,7 @@
 import {
   SET_POSTS,
-  SET_LIKES
+  SET_LIKES,
+  SET_COMMUNITIES
 } from "../actions/types";
 
 

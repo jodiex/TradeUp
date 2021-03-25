@@ -53,7 +53,7 @@ const Profile = (props) => {
     }
 
     return () => mounted = false;
-  }, [username]);
+  }, [username, isAuthenticated, userId]);
 
   // emoji status
   const [emojiStatus, setEmojiStatus] = useState('grinning');

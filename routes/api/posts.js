@@ -68,6 +68,13 @@ router.get("/trending", (req, res) => {
 
   Like.aggregate([
     {
+      $match: {
+        date: {
+          $gte: d
+        }
+      }
+    },
+    {
       $group: {
         _id: '$post',
         count: { $sum: 1 }

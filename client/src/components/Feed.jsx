@@ -60,7 +60,7 @@ class Feed extends Component {
                 />
               )
               :
-              <Text>No posts yet. Follow a user to get started!</Text>
+              <Text>No posts in your feed yet. Follow a user to get started!</Text>
             }
           </Box>
         </VStack>
