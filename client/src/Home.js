@@ -12,8 +12,8 @@ class Home extends Component {
       <Fragment>
         <Flex>
           <Spacer />
-          <Sidebar isProfile={false}/>
-          <Feed mode={this.props.auth.isAuthenticated ? "feed" : "trending"} username=""/>
+          <Sidebar isProfile={false} username=""/>
+          <Feed mode={this.props.auth.isAuthenticated ? "feed" : "trending"} username="" community=""/>
           <Spacer />
         </Flex>
         <LoginButtons />

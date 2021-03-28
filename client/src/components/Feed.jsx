@@ -5,7 +5,14 @@ import Write from './Write';
 import Title from './Title';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { updateProfilePosts, updateLikes, updateLikedPosts, updateTrendingPosts, updateFeedPosts } from "../actions/feedActions";
+import {
+  updateProfilePosts,
+  updateLikes,
+  updateLikedPosts,
+  updateTrendingPosts,
+  updateFeedPosts,
+  updateCommunityPosts
+} from "../actions/feedActions";
 
 const isEmpty = require("is-empty");
 
@@ -17,7 +24,11 @@ class Feed extends Component {
     } else if (this.props.mode === "trending") {
       // set posts to trending posts
       this.props.updateTrendingPosts();
+    } else if (this.props.mode === "community") {
+      // set posts to community posts
+      this.props.updateCommunityPosts(this.props.community);
     }
+
     if (this.props.auth.isAuthenticated) {
       // update total liked posts
       this.props.updateLikes(!isEmpty(this.props.auth.user) ? this.props.auth.user.username : "");
@@ -39,11 +50,13 @@ class Feed extends Component {
           {this.props.mode === "feed" &&
             <Title text="Your Feed" />}
           {this.props.mode === "user" &&
-            <Title text="Posts" />}
+            <Title text={"Posts: " + this.props.username}/>}
           {this.props.mode === "trending" &&
             <Title text="Trending Posts" />}
           {this.props.mode === "likes" &&
             <Title text="Likes" />}
+          {this.props.mode === "community" &&
+            <Title text={"Posts: " + this.props.community} />}
           <Box w={["xs", "md", "lg", "xl", "2xl"]}>
             {posts.length > 0 ?
               posts.map((post) => 
@@ -75,6 +88,7 @@ Feed.propTypes = {
   updateLikedPosts: PropTypes.func.isRequired,
   updateTrendingPosts: PropTypes.func.isRequired,
   updateFeedPosts: PropTypes.func.isRequired,
+  updateCommunityPosts: PropTypes.func.isRequired,
   feed: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -86,4 +100,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { updateProfilePosts, updateLikes, updateLikedPosts, updateTrendingPosts, updateFeedPosts })(Feed);
+export default connect(mapStateToProps, { updateProfilePosts, updateLikes, updateLikedPosts, updateTrendingPosts, updateFeedPosts, updateCommunityPosts })(Feed);

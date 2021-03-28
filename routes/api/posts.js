@@ -59,6 +59,38 @@ router.get("/user/:username", (req, res) => {
     })
 });
 
+// @route GET api/posts/community/:name
+// @desc Get all posts by community name
+// @access Public
+router.get("/community/:name", (req, res) => {
+  const name = req.params.name;
+    
+  Post
+    .find({ tag: name })
+    .sort({ date: "desc" })
+    .limit(50)
+    .exec((err, docs) => {
+      if (err) {
+        console.log(err);
+        return res.status(500);
+      }
+      let posts = [];
+      for (let d of docs) {
+        posts.push({
+          _id: d._id,
+          username: d.username,
+          author: d.author,
+          authorName: d.authorName,
+          tag: d.tag,
+          text: d.text,
+          date: d.date,
+          reshared: d.reshared
+        });
+      }
+      return res.status(200).json({ posts: posts });
+    })
+});
+
 // @route GET api/posts/trending
 // @desc Get trending (most liked) posts within the last 7 days
 // @access Public

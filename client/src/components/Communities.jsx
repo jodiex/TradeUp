@@ -41,13 +41,14 @@ class Communities extends Component {
         follower: this.props.auth.user.id,
         date: new Date()
       };
-      axios
-        .post("/api/communities/follow/" + e.target.id, followBody)
-        .then(res => {
-          // update joined communities in redux
-          this.updateCommunities(this.props.auth.user.username);
-        })
-        .catch(err => console.log(err));
+      console.log(e.target.id)
+      // axios
+      //   .post("/api/communities/follow/" + e.target.id, followBody)
+      //   .then(res => {
+      //     // update joined communities in redux
+      //     this.updateCommunities(this.props.auth.user.username);
+      //   })
+      //   .catch(err => console.log(err));
     }
   }
 

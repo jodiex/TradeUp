@@ -100,6 +100,12 @@ const Post = (props) => {
     }
   }
 
+  // nav to community page
+  const navToCommunityPage = (e) => {
+    e.preventDefault();
+    window.location.href = "/community/" + props.tag;
+  }
+
   return (
     <Box h={["9em", null, "9em", null, "8em"]} bg="white" borderRadius="xl" py="3" px="4" pos="relative" mb={5}>
       <HStack>
@@ -111,7 +117,8 @@ const Post = (props) => {
           <Button
           variant="secondary"
           textStyle="h7"
-          size="xs">
+          size="xs"
+          onClick={navToCommunityPage}>
             # {props.tag}
           </Button>
         }

@@ -131,6 +131,27 @@ export const updateFeedPosts = (username) => dispatch => {
   }
 };
 
+// update posts in state to community posts
+export const updateCommunityPosts = (community) => dispatch => {
+  if (community) {
+    axios
+      .get("/api/posts/community/" + community)
+      .then(res => {
+        dispatch(setPosts(
+          res.data.posts
+        ))
+      })
+      .catch(err => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      });
+  } else {
+    dispatch(setPosts([]))
+  }
+};
+
 // update joined communities in state
 export const updateCommunities = (username) => dispatch => {
   if (username) {

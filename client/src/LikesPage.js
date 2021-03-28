@@ -36,7 +36,7 @@ class LikesPage extends Component {
         <Flex>
           <Spacer />
           <Sidebar isProfile={true} username={this.state.username}/>
-          <Feed mode="likes" username={this.state.username}/>
+          <Feed mode="likes" username={this.state.username} community=""/>
           <Spacer />
         </Flex>
         <LoginButtons />
