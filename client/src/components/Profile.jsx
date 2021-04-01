@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MdPersonAdd } from "react-icons/md";
+import { MdPersonAdd, MdRemoveCircle } from "react-icons/md";
 import { HiOutlinePencil } from "react-icons/hi";
 import { Box, Text, Container, Button, Icon, Image, Input, Textarea } from "@chakra-ui/react"
 import axios from "axios";
@@ -124,6 +124,7 @@ const Profile = (props) => {
     }
   }
 
+  // unfollow
   const onUnfollowClick = (e) => {
     if (!isAuthenticated) {
       // redirect to login if not authed
@@ -200,7 +201,7 @@ const Profile = (props) => {
               <Button
               variant={isFollowing ? "outline" : "secondary"}
               textStyle="h2"
-              leftIcon={!isFollowing && <Icon as={MdPersonAdd} w={5} h={5} />}
+              leftIcon={<Icon as={isFollowing ? MdRemoveCircle : MdPersonAdd} w={5} h={5} />}
               onClick={isFollowing ? onUnfollowClick : onFollowClick }
               >
                 {isFollowing ?

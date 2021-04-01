@@ -156,7 +156,7 @@ export const updateCommunityPosts = (community) => dispatch => {
 export const updateCommunities = (username) => dispatch => {
   if (username) {
     axios
-      .get("/api/communities/" + username + "/joined")
+      .get("/api/communities/joined/" + username)
       .then(res => {
         const joined = res.data.joined ? res.data.joined : [];
         dispatch(setCommunities(joined))
@@ -177,6 +177,6 @@ export const updateCommunities = (username) => dispatch => {
 export const setCommunities = (communities) => {
   return {
     type: SET_COMMUNITIES,
-    communities: communities
+    communities: communities ? communities : []
   };
 };

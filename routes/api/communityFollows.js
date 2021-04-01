@@ -68,9 +68,7 @@ router.get("/joined/:username/", (req, res) => {
           }
           let joined = [];
           for (let d of docs) {
-            joined.push({
-              name: d.name
-            })
+            joined.push(d.name)
           }
           return res.status(200).json({
             joined: joined
@@ -133,7 +131,7 @@ router.get("/trending", (req, res) => {
       return res.status(500);
     }
     var communities = docs.map(doc => {
-      return doc.name;
+      return doc._id;
     })
     return res.status(200).json({ communities: communities });
   })

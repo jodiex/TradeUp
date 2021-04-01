@@ -13,6 +13,8 @@ const initialState = {
 
 
 export default function(state = initialState, action) {
+  console.log(action)
+  console.log(state)
   switch (action.type) {
     case SET_POSTS:
       return {

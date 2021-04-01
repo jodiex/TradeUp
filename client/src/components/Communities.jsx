@@ -30,7 +30,7 @@ class Communities extends Component {
 
 
   // follow
-  onFollowClick(e) {
+  onFollowClick = (e) => {
     if (!this.props.auth.isAuthenticated) {
       // redirect to login if not authed
       window.location.href = "/login";
@@ -50,10 +50,10 @@ class Communities extends Component {
       //   })
       //   .catch(err => console.log(err));
     }
-  }
+  };
 
   // follow
-  onUnfollowClick(e) {
+  onUnfollowClick = (e) => {
     if (!this.props.auth.isAuthenticated) {
       // redirect to login if not authed - should not be possible
       window.location.href = "/login";
@@ -68,9 +68,10 @@ class Communities extends Component {
         })
         .catch(err => console.log(err));
     }
-  }
+  };
 
   render() {
+    console.log(this.props.feed)
     return (
         <Box w="2xs"
         bg="white"
@@ -81,15 +82,15 @@ class Communities extends Component {
                 <Text textStyle="h2">Popular Communities&ensp;<Icon as={MdPeople} w={5} h={5} /></Text>
                 { this.state.trending.map((comm) => 
                   <Flex mt="2">
-                      <Text textStyle="h5"># {comm.name}</Text>
+                      <Text textStyle="h5"># {comm}</Text>
                       <Spacer />
                       <IconButton
-                        id={comm.name}
+                        id={comm}
                         aria-label="Join Community"
                         variant="secondary"
                         size="xs"
-                        icon={comm.name in this.state.feed.communities ? <ImMinus /> : <ImPlus />}
-                        onClick={comm.name in this.state.feed.communities ? this.onFollowClick : this.onUnfollowClick}/>
+                        icon={comm in this.props.feed.communities ? <ImMinus /> : <ImPlus />}
+                        onClick={comm in this.props.feed.communities ? this.onFollowClick : this.onUnfollowClick}/>
                   </Flex>
                 )}
             </Container>

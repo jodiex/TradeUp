@@ -44,7 +44,7 @@ app.use("/api/users", users);
 app.use("/api/posts", posts);
 app.use("/api/likes", likes);
 app.use("/api/follows", follows);
-app.use("/api/communityFollows", communityFollows);
+app.use("/api/communities", communityFollows);
 
 const port = process.env.PORT || 5000; // process.env.port is Heroku's port if you choose to deploy the app there
 
