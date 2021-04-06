@@ -47,6 +47,15 @@ class Feed extends Component {
         this.props.updateLikedPosts(this.props.username);
       } else if (this.props.mode === "feed") {
         this.props.updateFeedPosts(!isEmpty(this.props.auth.user) ? this.props.auth.user.username : "");
+      } else if (this.props.mode === "community") {
+        axios
+          .get("/api/communities/follow/" + this.props.community, { params: { follower: this.props.auth.user.id } })
+          .then(res => {
+            this.setState({ isFollowing: res.data.follow })
+          })
+          .catch(err => {
+            console.log(err)
+          });
       }
     }
   }

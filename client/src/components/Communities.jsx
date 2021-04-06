@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ImPlus, ImMinus } from "react-icons/im";
 import { MdPeople } from "react-icons/md";
-import { Box, Text, Container, IconButton, Icon, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Text, Container, IconButton, Icon, Flex, Spacer, Link } from "@chakra-ui/react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -22,12 +22,9 @@ class Communities extends Component {
         this.setState({
           trending: res.data.communities
         });
-        // update joined communities in redux
-        this.updateCommunities(this.props.auth.user.username);
       })
       .catch(err => console.log(err));
   }
-
 
   // follow
   onFollowClick = (e) => {
@@ -71,7 +68,7 @@ class Communities extends Component {
   };
 
   render() {
-    console.log(this.props.feed)
+    const communities = this.props.feed.communities ? this.props.feed.communities : [];
     return (
         <Box w="2xs"
         bg="white"
@@ -81,16 +78,18 @@ class Communities extends Component {
             <Container p="4">
                 <Text textStyle="h2">Popular Communities&ensp;<Icon as={MdPeople} w={5} h={5} /></Text>
                 { this.state.trending.map((comm) => 
-                  <Flex mt="2">
-                      <Text textStyle="h5"># {comm}</Text>
+                  <Flex key={comm} mt="2">
+                      <Link href={"/community/" + comm} _hover={{ color: "black" }}>
+                        <Text textStyle="h5"># {comm}</Text>
+                      </Link>
                       <Spacer />
                       <IconButton
                         id={comm}
                         aria-label="Join Community"
                         variant="secondary"
                         size="xs"
-                        icon={comm in this.props.feed.communities ? <ImMinus /> : <ImPlus />}
-                        onClick={comm in this.props.feed.communities ? this.onFollowClick : this.onUnfollowClick}/>
+                        icon={comm in communities ? <ImMinus /> : <ImPlus />}
+                        onClick={comm in communities ? this.onFollowClick : this.onUnfollowClick}/>
                   </Flex>
                 )}
             </Container>
