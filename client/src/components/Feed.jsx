@@ -78,7 +78,7 @@ class Feed extends Component {
           .then(res => {
             this.setState({ isFollowing: true });
             // update joined communities in redux
-            this.updateCommunities(this.props.auth.user.username);
+            this.props.updateCommunities(this.props.auth.user.username);
           })
           .catch(err => console.log(err));
       }
@@ -98,7 +98,7 @@ class Feed extends Component {
         .then(res => {
           this.setState({ isFollowing: false });
           // update joined communities in redux
-          this.updateCommunities(this.props.auth.user.username);
+          this.props.updateCommunities(this.props.auth.user.username);
         })
         .catch(err => console.log(err));
     }

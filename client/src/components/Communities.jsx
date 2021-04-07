@@ -32,36 +32,33 @@ class Communities extends Component {
       // redirect to login if not authed
       window.location.href = "/login";
     } else {
-      e.preventDefault();
       // add new follow to db
       const followBody = {
         follower: this.props.auth.user.id,
         date: new Date()
       };
-      console.log(e.target.id)
-      // axios
-      //   .post("/api/communities/follow/" + e.target.id, followBody)
-      //   .then(res => {
-      //     // update joined communities in redux
-      //     this.updateCommunities(this.props.auth.user.username);
-      //   })
-      //   .catch(err => console.log(err));
+      axios
+        .post("/api/communities/follow/" + e.currentTarget.id, followBody)
+        .then(res => {
+          // update joined communities in redux
+          this.props.updateCommunities(this.props.auth.user.username);
+        })
+        .catch(err => console.log(err));
     }
   };
 
-  // follow
+  // unfollow
   onUnfollowClick = (e) => {
     if (!this.props.auth.isAuthenticated) {
       // redirect to login if not authed - should not be possible
       window.location.href = "/login";
     } else {
-      e.preventDefault();
       // delete follow
       axios
-        .delete("/api/communities/follow/" + e.target.id, { params: { follower: this.props.auth.user.id } })
+        .delete("/api/communities/follow/" + e.currentTarget.id, { params: { follower: this.props.auth.user.id } })
         .then(res => {
           // update joined communities in redux
-          this.updateCommunities(this.props.auth.user.username);
+          this.props.updateCommunities(this.props.auth.user.username);
         })
         .catch(err => console.log(err));
     }
@@ -88,8 +85,8 @@ class Communities extends Component {
                         aria-label="Join Community"
                         variant="secondary"
                         size="xs"
-                        icon={comm in communities ? <ImMinus /> : <ImPlus />}
-                        onClick={comm in communities ? this.onFollowClick : this.onUnfollowClick}/>
+                        icon={communities.includes(comm) ? <ImMinus /> : <ImPlus />}
+                        onClick={communities.includes(comm) ? this.onUnfollowClick : this.onFollowClick}/>
                   </Flex>
                 )}
             </Container>
